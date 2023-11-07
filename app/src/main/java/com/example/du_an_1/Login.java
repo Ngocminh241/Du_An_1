@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
                         Intent intent = new Intent(Login.this, Create_acc.class);
                         startActivity(intent);
                     }
-                }, 1400);
+                }, 1200);
             }
         });
     }
