@@ -1,107 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EB8237"
-
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".Login">
 
     <ImageView
+        android:id="@+id/img_logo"
         android:layout_width="wrap_content"
         android:layout_height="350dp"
         android:src="@drawable/anh_spl"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lakkireddy"
         android:gravity="center_horizontal"
         android:text="CREATE ACC"
         android:textColor="@color/white"
-        android:layout_marginTop="-50dp"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_logo"
+        android:layout_marginTop="-60dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/rectangle_4"
-        android:padding="20dp"
-        android:paddingBottom="5dp"
-        android:orientation="vertical">
-
-        <TextView
+        <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Username:"
-            android:textColor="#B91C1C"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp"
-            android:fontFamily="@font/gideonroman"/>
-        <EditText
-            android:id="@+id/ed_username_input_create"
-            android:layout_width="350dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:background="@drawable/background_input_text"/>
+            android:layout_marginTop="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Password:"
-            android:textColor="#B91C1C"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp"
-            android:fontFamily="@font/gideonroman"/>
-        <EditText
-            android:id="@+id/ed_password_input_create"
-            android:layout_width="350dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:background="@drawable/background_input_text"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Confirm Password:"
-            android:textColor="#B91C1C"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp"
-            android:fontFamily="@font/gideonroman"/>
-        <EditText
-            android:id="@+id/ed_re_password_input_create"
-            android:layout_width="350dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:background="@drawable/background_input_text"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_4"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:paddingBottom="5dp">
 
-        <Button
-            android:id="@+id/btn_create_acc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_button_login"
-            android:layout_gravity="center_horizontal"
-            android:text="CREATE"
-            android:textSize="20sp"
-            app:backgroundTint="@null"
-            android:layout_marginTop="30dp" />
+                <EditText
+                    android:id="@+id/ed_username_input_create"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/background_input_text"
+                    android:drawableStart="@drawable/icon_user"
+                    android:drawablePadding="10dp"
+                    android:hint="Username"
+                    android:paddingStart="10dp"
+                    android:textSize="14sp" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/ed_password_input_create"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/background_input_text"
+                    android:drawableStart="@drawable/icon_password"
+                    android:drawablePadding="10dp"
+                    android:hint="New Password"
+                    android:paddingStart="10dp"
+                    android:textSize="14sp" />
 
+                <EditText
+                    android:id="@+id/ed_re_password_input_create"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/background_input_text"
+                    android:drawableStart="@drawable/icon_password"
+                    android:drawablePadding="10dp"
+                    android:hint="Confim Password"
+                    android:paddingStart="10dp"
+                    android:textSize="14sp" />
 
+                <Button
+                    android:id="@+id/btn_create_acc"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/background_button_login"
+                    android:text="CREATE"
+                    android:textSize="20sp"
+                    app:backgroundTint="@null" />
+                <Button
+                    android:id="@+id/btn_login_acc"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_button_login"
+                    android:text="LOGIN"
+                    android:textSize="20sp"
+                    app:backgroundTint="@null" />
 
-
-
-</LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
