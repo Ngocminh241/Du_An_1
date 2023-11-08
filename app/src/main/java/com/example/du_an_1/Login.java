@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class Login extends AppCompatActivity {
 
     TextView tv_create_new_acc;
+    Button btn_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,21 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         tv_create_new_acc = findViewById(R.id.tv_create_new_acc);
+        btn_login = findViewById(R.id.btn_login);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }, 1200);
+            }
+        });
 
         tv_create_new_acc.setOnClickListener(new View.OnClickListener() {
             @Override
