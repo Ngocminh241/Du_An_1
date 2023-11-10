@@ -1,16 +1,19 @@
 package com.example.du_an_1;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
-import com.airbnb.lottie.L;
 import com.example.du_an_1.Adapter.CategoryAdapter;
 import com.example.du_an_1.Adapter.PopularAdapter;
 import com.example.du_an_1.Domain.CategoryDomain;
 import com.example.du_an_1.Domain.FoodDomain;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -24,6 +27,24 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewCategory();
         recyclerViewPopular();
+        bottomNavigation();
+    }
+    private void bottomNavigation(){
+        FloatingActionButton floatingActionButton = findViewById(R.id.float_cart_btn);
+        LinearLayout homeBtn = findViewById(R.id.home_btn);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Cart_Activity.class));
+            }
+        });
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+            }
+        });
     }
 
     private void recyclerViewCategory() {
