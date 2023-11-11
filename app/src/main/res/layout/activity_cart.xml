@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="My Cart"
+                android:text="Giỏ Hàng"
                 android:textAlignment="center"
                 android:textColor="#ff3d00"
                 android:textSize="20sp"
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dịch vụ giao hàng:"
+                    android:text="Phí Dịch Vụ:"
                     android:textColor="#373b54"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -177,7 +177,7 @@
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/scrollView_cart"
-        app:layout_constraintEnd_toEndOf="@id/scrollView_cart"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/scrollView_cart" />
 

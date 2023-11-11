@@ -85,7 +85,7 @@ public class Cart_Activity extends AppCompatActivity {
     }
     private void CalculateCart(){
         double percenTax = 0.02;
-        double deliver = 10;
+        double deliver = 0.05;
 
         tax = Math.ceil((managementCart.gettotalFee()*percenTax)*100)/100;
         double total = Math.ceil((managementCart.gettotalFee()+tax+deliver)*100)/100;
