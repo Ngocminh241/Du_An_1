@@ -34,7 +34,7 @@
         android:layout_marginTop="420dp"
         android:elevation="50dp"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/animation_load" />
+        app:lottie_rawRes="@raw/animation_load_2" />
 
 
 </RelativeLayout>
