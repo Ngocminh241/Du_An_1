@@ -126,7 +126,6 @@
                 android:text="CREATE"
                 android:textSize="20sp"
                 app:backgroundTint="@null" />
-
             <Button
                 android:id="@+id/btn_login_acc"
                 android:layout_width="150dp"
@@ -137,8 +136,6 @@
                 android:text="LOGIN"
                 android:textSize="20sp"
                 app:backgroundTint="@null" />
-
-
 
         </LinearLayout>
     </ScrollView>
