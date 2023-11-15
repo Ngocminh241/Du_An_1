@@ -80,6 +80,7 @@ public class Create_acc extends AppCompatActivity {
                 user.setsDT(phoneNumber);
                 user.setMaDN(userName);
                 user.setMatKhau(passWord);
+                user.setVaiTro(0);
                 dao_user.insert(user);
                 dialog.dismiss();
                 Intent intent = new Intent(Create_acc.this, Login.class);

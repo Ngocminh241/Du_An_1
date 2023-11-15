@@ -1,10 +1,13 @@
 package com.example.du_an_1.DAO;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.du_an_1.DTO.User;
 import com.example.du_an_1.Database.DbHelper;
@@ -27,6 +30,7 @@ public class User_DAO {
         values.put("matKhau", obj.getMatKhau());
         values.put("hoTen", obj.getHoTen());
         values.put("sDT", obj.getsDT());
+        values.put("vaiTro", obj.getsDT());
         return db.insert("User", null, values);
     }
 
@@ -46,8 +50,13 @@ public class User_DAO {
         return getData(sql);
     }
 
-    public User getID(String id) {
+    public User getID(int id) {
         String sql = "SELECT * FROM User WHERE maUser=?";
+        List<User> list = getData(sql, String.valueOf(id));
+        return list.get(0);
+    }
+    public User getMaDN(String id) {
+        String sql = "SELECT * FROM User WHERE maDN=?";
         List<User> list = getData(sql, id);
         return list.get(0);
     }
@@ -62,6 +71,7 @@ public class User_DAO {
         return 1;
     }
 
+
     @SuppressLint("Range")
     private List<User> getData(String sql, String... selectionArgs) {
         List<User> list = new ArrayList<>();
@@ -73,8 +83,30 @@ public class User_DAO {
             obj.setMatKhau(cursor.getString(cursor.getColumnIndex("matKhau")));
             obj.setHoTen(cursor.getString(cursor.getColumnIndex("hoTen")));
             obj.setsDT(cursor.getString(cursor.getColumnIndex("sDT")));
+            obj.setMaUser(cursor.getInt(cursor.getColumnIndex("vaiTro")));
             list.add(obj);
         }
         return list;
     }
+
+
+
+    String tenTV;
+    public String getTenTV(String maTV) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT hoTen FROM User WHERE maDN=?", new String[] {String.valueOf(maTV)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    tenTV = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return tenTV;
+    }
+
+
 }

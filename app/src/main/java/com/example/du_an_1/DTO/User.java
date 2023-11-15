@@ -6,16 +6,18 @@ public class User {
     private String matKhau;
     private String hoTen;
     private String sDT;
+    private int vaiTro;
 
     public User() {
     }
 
-    public User(int maUser, String maDN, String matKhau, String hoTen, String sDT) {
+    public User(int maUser, String maDN, String matKhau, String hoTen, String sDT, int vaiTro) {
         this.maUser = maUser;
         this.maDN = maDN;
         this.matKhau = matKhau;
         this.hoTen = hoTen;
         this.sDT = sDT;
+        this.vaiTro = vaiTro;
     }
 
     public int getMaUser() {
@@ -56,5 +58,12 @@ public class User {
 
     public void setsDT(String sDT) {
         this.sDT = sDT;
+    }
+    public int getVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(int vaiTro) {
+        this.vaiTro = vaiTro;
     }
 }

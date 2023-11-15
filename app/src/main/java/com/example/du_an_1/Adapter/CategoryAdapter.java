@@ -1,5 +1,8 @@
 package com.example.du_an_1.Adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +15,24 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.du_an_1.DAO.User_DAO;
+import com.example.du_an_1.DTO.User;
 import com.example.du_an_1.Domain.CategoryDomain;
+import com.example.du_an_1.List_Category.Pizza_List;
 import com.example.du_an_1.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     ArrayList<CategoryDomain>categoryDomains;
+
+    Context context;
+    User_DAO user_dao;
+
+    String name;
+    List<User> userList;
+    User user;
 
     public CategoryAdapter(ArrayList<CategoryDomain> categoryDomains) {
         this.categoryDomains = categoryDomains;
@@ -31,6 +45,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return new ViewHolder(inflate);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         holder.categoryName.setText(categoryDomains.get(position).getTitle());
@@ -65,6 +80,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(picUrl, "drawable",holder.itemView.getContext().getPackageName());
 
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.categoryPic);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
