@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.User;
 import com.example.du_an_1.Domain.CategoryDomain;
+import com.example.du_an_1.List_Category.Burger_List;
 import com.example.du_an_1.List_Category.Pizza_List;
 import com.example.du_an_1.R;
 
@@ -81,13 +82,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         Glide.with(holder.itemView.getContext()).load(drawableResourceId).into(holder.categoryPic);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        if (picUrl == "cat_1"){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
                 holder.itemView.getContext().startActivity(intent);
-            }
-        });
+                }
+            });
+        } else if (picUrl == "cat_2"){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(holder.itemView.getContext(), Burger_List.class);
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+        }
+
     }
 
     @Override

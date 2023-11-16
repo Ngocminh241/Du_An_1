@@ -1,5 +1,6 @@
 package com.example.du_an_1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -63,6 +64,8 @@ public class ShowDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 object.setNumberInCart(numberOrder);
                 managementCart.insertFood(object);
+                Intent intent = new Intent(ShowDetailActivity.this, Cart_Activity.class);
+                startActivity(intent);
             }
         });
     }
