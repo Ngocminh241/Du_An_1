@@ -9,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.du_an_1.Adapter.Cart_Adapter;
 import com.example.du_an_1.Adapter.CategoryAdapter;
 import com.example.du_an_1.Cart_Activity;
 import com.example.du_an_1.Domain.CategoryDomain;
+import com.example.du_an_1.Helper.ManagementCart;
+import com.example.du_an_1.Interface.ChangeNumberItemsListener;
 import com.example.du_an_1.MainActivity;
 import com.example.du_an_1.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,10 +24,13 @@ import java.util.ArrayList;
 public class Pizza_List extends AppCompatActivity {
     private RecyclerView recyclerViewCategoryList;
     private RecyclerView.Adapter adapter1;
+    private ManagementCart managementCart;
+    RecyclerView recyclerViewList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pizza_list);
+        initList();
 
         recyclerViewCategory();
         bottomNavigation();
@@ -61,6 +67,14 @@ public class Pizza_List extends AppCompatActivity {
         adapter1 = new CategoryAdapter(categoryDomains);
         recyclerViewCategoryList.setAdapter(adapter1);
         adapter1.getItemViewType(R.id.categoryPic);
+
+    }
+
+    private void initList(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
+        recyclerViewCategoryList = findViewById(R.id.rcv_pizza);
+        recyclerViewList.setLayoutManager(linearLayoutManager);
+        recyclerViewList.setAdapter(adapter1);
 
     }
 }
