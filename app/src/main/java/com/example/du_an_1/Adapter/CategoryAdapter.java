@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.User;
 import com.example.du_an_1.Domain.CategoryDomain;
-import com.example.du_an_1.List_Category.Burger_List;
 import com.example.du_an_1.List_Category.Pizza_List;
 import com.example.du_an_1.R;
 
@@ -31,9 +30,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     Context context;
     User_DAO user_dao;
 
-    String name;
+    String name,strUser;
     List<User> userList;
     User user;
+
 
     public CategoryAdapter(ArrayList<CategoryDomain> categoryDomains) {
         this.categoryDomains = categoryDomains;
@@ -87,15 +87,49 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
-                holder.itemView.getContext().startActivity(intent);
+                    strUser = "Pizza";
+                    Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
+                    intent.putExtra("title", strUser);
+                    holder.itemView.getContext().startActivity(intent);
                 }
             });
         } else if (picUrl == "cat_2"){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(holder.itemView.getContext(), Burger_List.class);
+                    strUser = "Burger";
+                    Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
+                    intent.putExtra("title", strUser);
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+        }  else if (picUrl == "cat_3"){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    strUser = "Hotdog";
+                    Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
+                    intent.putExtra("title", strUser);
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+        }  else if (picUrl == "cat_4"){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    strUser = "Drink";
+                    Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
+                    intent.putExtra("title", strUser);
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+        } else if (picUrl == "cat_5"){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    strUser = "Donut";
+                    Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
+                    intent.putExtra("title", strUser);
                     holder.itemView.getContext().startActivity(intent);
                 }
             });
@@ -112,6 +146,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         TextView categoryName;
         ImageView categoryPic;
         ConstraintLayout mainLayout;
+        String strUser;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryName = itemView.findViewById(R.id.categoryName);

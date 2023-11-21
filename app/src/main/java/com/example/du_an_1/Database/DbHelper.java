@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "FOODFPOLY";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 1;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -23,18 +23,26 @@ public class DbHelper extends SQLiteOpenHelper {
                 "sDT TEXT NOT NULL," +
                 "vaiTro INTEGER NOT NULL)";
 
+        String createTableLoaiFood = "CREATE TABLE loai_Food(maLoai INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL," +
+                "tenLoai TEXT UNIQUE NOT NULL)";
+
+        String createTableFood = "create table FOOD(maFood TEXT PRIMARY KEY UNIQUE NOT NULL," +
+                "maLoai INTEGER REFERENCES loai_Food(maLoai),"+
+                "tenFood TEXT NOT NULL," +
+                "giaFood INTEGER NOT NULL," +
+                "hinhAnh BLOB,"+
+                "moTa TEXT NOT NULL)";
+
 
         String addAdmin = "INSERT INTO User(maUser,maDN,matKhau,hoTen,sDT,vaiTro) VALUES(1,'admin','admin','Admin','admin',1)";
+        String addLoai = "INSERT INTO loai_Food(maLoai, tenLoai) VALUES(1,'Pizza'),"+"(2,'Burger'),"+"(3,'Hotdog'),"+"(4,'Drink'),"+"(5,'Donut')";
+        String addPizza = "INSERT INTO FOOD(maFood,maLoai,tenFood,giaFood,hinhAnh,moTa) VALUES('F001',1,'Pizza Chese',880,null,'abc')";
+
         db.execSQL(createTableUser);
-
+        db.execSQL(createTableLoaiFood);
+        db.execSQL(createTableFood);
         db.execSQL(addAdmin);
-
-        String createTablePizza = "create table Pizza(maPizza INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " tenPizza TEXT NOT NULL," +
-                "giaPizza INTEGER NOT NULL," +
-                "hinhAnh BLOB)";
-        db.execSQL(createTablePizza);
-        String addPizza = "INSERT INTO Pizza VALUES(1, 'pizza chese', 8.8, null)";
+        db.execSQL(addLoai);
         db.execSQL(addPizza);
     }
 
@@ -42,7 +50,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             db.execSQL("drop table if exists User");
-            db.execSQL("drop table if exists Pizza");
+            db.execSQL("drop table if exists loai_Food");
+            db.execSQL("drop table if exists FOOD");
             onCreate(db);
         }
     }

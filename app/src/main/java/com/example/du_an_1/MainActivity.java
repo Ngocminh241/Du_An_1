@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.du_an_1.Adapter.CategoryAdapter;
 import com.example.du_an_1.Adapter.PopularAdapter;
 import com.example.du_an_1.DAO.User_DAO;
+import com.example.du_an_1.DTO.User;
 import com.example.du_an_1.Domain.CategoryDomain;
 import com.example.du_an_1.Domain.FoodDomain;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     User_DAO user_dao;
+    User user;
     TextView tv_name;
     private RecyclerView.Adapter adapter1, adapter2;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
@@ -36,9 +38,13 @@ public class MainActivity extends AppCompatActivity {
         user_dao = new User_DAO(this);
 //        User thuThu = user_dao.getMaDN(user);
         String username = user_dao.getTenTV(user);
-        tv_name.setText("Hi " + username);
+//        tv_name.setText("Hi " + username);
 
-
+        if (user == "Admin"){
+            tv_name.setText("Hi Admin");
+        } else {
+            tv_name.setText("Hi " + username);
+        }
         recyclerViewCategory();
         recyclerViewPopular();
         bottomNavigation();
@@ -92,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewPopularList.setLayoutManager(linearLayoutManager);
 
         ArrayList<FoodDomain> foodList = new ArrayList<>();
-        foodList.add(new FoodDomain("Pepperoni pizza","pizza","slices pepperoni, mozzerella cheese, fresh oregano, ground black pepper, pizza sauce", 9.76));
-        foodList.add(new FoodDomain("Cheese Burger","pop_2","beef, Gouda cheese, Special Sauce, Lettuce, Tomato", 8.79));
-        foodList.add(new FoodDomain("Vegetable pizza","pop_3","olive oil, Vegetable oil, pitted kalamata, cherry tomatoes, fresh oregano, basil", 8.5));
+        foodList.add(new FoodDomain("Pepperoni pizza","pizza","slices pepperoni, mozzerella cheese, fresh oregano, ground black pepper, pizza sauce", 1000));
+        foodList.add(new FoodDomain("Cheese Burger","pop_2","beef, Gouda cheese, Special Sauce, Lettuce, Tomato", 950));
+        foodList.add(new FoodDomain("Vegetable pizza","pop_3","olive oil, Vegetable oil, pitted kalamata, cherry tomatoes, fresh oregano, basil", 850));
 
         adapter2 = new PopularAdapter(foodList);
         recyclerViewPopularList.setAdapter(adapter2);

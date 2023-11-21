@@ -3,6 +3,7 @@ package com.example.du_an_1.Helper;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.Domain.FoodDomain;
 import com.example.du_an_1.Interface.ChangeNumberItemsListener;
 
@@ -35,9 +36,33 @@ public class ManagementCart {
         tinyDB.putListObject("CartList", listFood);
         Toast.makeText(context, "Added to your cart", Toast.LENGTH_SHORT).show();
     }
+    public void insertFood_2(Food item){
+        ArrayList<Food> listFood = getListCart_2();
+        boolean exisAlready = false;
+        int n = 0;
+        for (int i = 0; i < listFood.size(); i++){
+            if (listFood.get(i).getTenFood().equals(item.getTenFood())){
+                exisAlready = true;
+                n = i;
+                break;
+            }
+        }
+        if (exisAlready){
+            listFood.get(n).setNumberInCart(item.getNumberInCart());
+        } else {
+            listFood.add(item);
+        }
+        tinyDB.putListObjec_2("CartList", listFood);
+        Toast.makeText(context, "Added to your cart", Toast.LENGTH_SHORT).show();
+    }
+
 
     public ArrayList<FoodDomain> getListCart(){
         return tinyDB.getListObject("CartList");
+    }
+
+    public ArrayList<Food> getListCart_2(){
+        return tinyDB.getListObject_2("CartList");
     }
 
     public void plusNumberFood(ArrayList<FoodDomain>listFood, int position, ChangeNumberItemsListener changeNumberItemsListener){
