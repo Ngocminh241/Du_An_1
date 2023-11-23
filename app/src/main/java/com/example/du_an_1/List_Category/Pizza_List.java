@@ -47,8 +47,7 @@ public class Pizza_List extends AppCompatActivity {
         tv_title_food.setText(title);
 
         list = new ArrayList<>();
-
-
+        food_dao = new Food_DAO(this);
         
 
         recyclerViewPizza();
@@ -110,18 +109,17 @@ public class Pizza_List extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         rcv_pizza = findViewById(R.id.rcv_pizza);
         rcv_pizza.setLayoutManager(linearLayoutManager);
-        List<Food> food = new ArrayList<>();
-        food.add(new Food("F002",1,"Pizza sauce", 970,null,"abcd"));
-        food.add(new Food("F003",2,"Pizza sauce", 3970,null,"abcd"));
-        food.add(new Food("F004",1,"Pizza sauce_2", 1970,null,"abcd"));
-
+//        List<Food> food = new ArrayList<>();
+//        food.add(new Food("F002",1,"Pizza sauce", 970,null,"abcd"));
+//        food.add(new Food("F003",2,"Pizza sauce", 3970,null,"abcd"));
+//        food.add(new Food("F004",1,"Pizza sauce_2", 1970,null,"abcd"));
+        list = food_dao.getAll();
         adapter_2 = new FoodAdapter(this,list);
-        adapter_2 = new FoodAdapter(this, food);
+//        adapter_2 = new FoodAdapter(this, food);
         rcv_pizza.setAdapter(adapter_2);
         context = (Pizza_List) this;
 //        adapter_2 = adapter_food;
         food_dao = new Food_DAO(this);
-        list = food_dao.getAll();
         adapter_2.notifyDataSetChanged();
 
     }

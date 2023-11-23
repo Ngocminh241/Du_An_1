@@ -1,5 +1,6 @@
 package com.example.du_an_1;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton floatingActionButton = findViewById(R.id.float_cart_btn);
         LinearLayout homeBtn = findViewById(R.id.home_btn);
         LinearLayout settingBtn = findViewById(R.id.setting_btn);
+        LinearLayout profile = findViewById(R.id.profile_btn);
+        LinearLayout support = findViewById(R.id.support_btn);
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +64,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Cart_Activity.class));
             }
         });
+        support.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+            }
+        });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Profile.class));
+
+            }
+        });
+
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

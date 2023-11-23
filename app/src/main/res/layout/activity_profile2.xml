@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:layout_width="360sp"
-            android:layout_height="47sp"
+            android:layout_height="87sp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_function"
@@ -39,10 +39,36 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center"
-                    android:text="@string/caidat"
+                    android:text="@string/account"
                     android:textColor="@color/white" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/layout_user_information"
+                android:layout_width="match_parent"
+                android:layout_height="43sp"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@string/content_description_image"
+                    android:src="@drawable/user_icon" />
+
+                <TextView
+                    android:id="@+id/account_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/notop_sans_regular"
+                    android:gravity="center"
+                    android:text="@string/example_full_name"
+                    android:textColor="@color/black" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -74,13 +100,13 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center_vertical"
-                    android:text="@string/doimatkhau"
+                    android:text="@string/bill_lower"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/tv_logout"
+                android:id="@+id/account_btn_layout_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_function_profile"
@@ -91,7 +117,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description_image"
-                    android:src="@drawable/log_out_icon" />
+                    android:src="@drawable/privacy_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -99,7 +125,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center_vertical"
-                    android:text="@string/dangxuat"
+                    android:text="@string/policy_and_secure"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>

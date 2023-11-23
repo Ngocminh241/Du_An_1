@@ -16,6 +16,12 @@
             android:name=".NavigationQuanLy"
             android:exported="false" />
         <activity
+            android:name=".UserInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
             android:name=".Adapter.LoaiFood_SpinerAdapter"
             android:exported="false" />
         <activity
