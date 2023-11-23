@@ -27,7 +27,7 @@ public class Food_DAO {
         values.put("tenFood", SP.getTenFood());
         values.put("giaFood", SP.getGiaFood());
         values.put("hinhAnh", SP.getHinhAnh());
-        values.put("mota", SP.getHinhAnh());
+        values.put("mota", SP.getMoTa());
         return db.insert("FOOD", null, values);
     }
 
@@ -45,7 +45,7 @@ public class Food_DAO {
         values.put("tenFood", SP.getTenFood());
         values.put("giaFood", SP.getGiaFood());
         values.put("hinhAnh", SP.getHinhAnh());
-        values.put("mota", SP.getHinhAnh());
+        values.put("mota", SP.getMoTa());
         String[] index = new String[]{
                 SP.getMaFood()
         };
@@ -61,10 +61,10 @@ public class Food_DAO {
             do {
                 String maFood = c.getString(0);
                 int maLoai = c.getInt(1);
-                String tenFood = c.getString(3);
-                int giaFood = c.getInt(4);
-                byte[] hinhAnh = c.getBlob(5);
-                String moTa = c.getString(6);
+                String tenFood = c.getString(2);
+                int giaFood = c.getInt(3);
+                byte[] hinhAnh = c.getBlob(4);
+                String moTa = c.getString(5);
                 list.add(new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa));
             } while (c.moveToNext());
         }

@@ -25,12 +25,11 @@ public class User_DAO {
 
     public long insert(User obj) {
         ContentValues values = new ContentValues();
-        values.put("maUser", obj.getMaUser());
         values.put("maDN", obj.getMaDN());
         values.put("matKhau", obj.getMatKhau());
         values.put("hoTen", obj.getHoTen());
         values.put("sDT", obj.getsDT());
-        values.put("vaiTro", obj.getsDT());
+        values.put("vaiTro", obj.getVaiTro());
         return db.insert("User", null, values);
     }
 

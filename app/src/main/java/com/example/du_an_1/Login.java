@@ -2,8 +2,10 @@ package com.example.du_an_1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.du_an_1.DAO.User_DAO;
+import com.example.du_an_1.DTO.User;
 
 public class Login extends AppCompatActivity {
 
@@ -64,6 +67,18 @@ public class Login extends AppCompatActivity {
                 }, 1200);
             }
         });
+        tv_create_new_acc.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction()== MotionEvent.ACTION_DOWN){
+                    tv_create_new_acc.setTextColor(Color.RED);
+                }
+                if (motionEvent.getAction()== MotionEvent.ACTION_UP){
+                    tv_create_new_acc.setTextColor(Color.BLUE);
+                }
+                return false;
+            }
+        });
     }
 
     public void rememberUser(String u, String p, boolean status) {
@@ -88,15 +103,39 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, "Username or Password cannot be left blank", Toast.LENGTH_SHORT).show();
         } else {
             if (user_dao.checkLogin(strUser, strPass) > 0) {
-                Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                 rememberUser(strUser, strPass, chkRememberPass.isChecked());
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("user", strUser);
-                startActivity(intent);
-                finish();
+                for (User obj : user_dao.getAll()) {
+                    if (obj.getMaDN().equalsIgnoreCase(strUser) && obj.getMatKhau().equalsIgnoreCase(strPass)) {
+                        if (obj.getMaUser() == 1) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                                    Intent i3 = new Intent(Login.this, NavigationQuanLy.class);
+                                    startActivity(i3);
+                                }
+                            }, 1200);
+                            return;
+                        }
+                        if (obj.getMaUser() != 1) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                                    Intent ic = new Intent(Login.this, MainActivity.class);
+                                    ic.putExtra("user", strUser);
+                                    startActivity(ic);
+                                    finish();
+                                }
+                            }, 1200);
+                            return;
+                        }
+                    }
+                }
             } else {
                 Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 }

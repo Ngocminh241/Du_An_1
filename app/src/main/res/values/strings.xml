@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FOOD FPOLY</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigationdrawer_driver_open">Open navigation drawer for driver</string>
+    <string name="navigationdrawer_driver_close">Close navigation drawer for driver</string>
+    <string name="navigationquanly_open">Open navigation quan ly</string>
+    <string name="navigationquanly_close">Close navigation quan ly</string>
 </resources>

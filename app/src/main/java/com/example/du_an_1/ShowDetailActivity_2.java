@@ -13,7 +13,7 @@ import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.Domain.FoodDomain;
 import com.example.du_an_1.Helper.ManagementCart;
 
-public class ShowDetailActivity extends AppCompatActivity {
+public class ShowDetailActivity_2 extends AppCompatActivity {
     private TextView tv_addToCart_btn;
     private TextView tv_title_showdetail, tv_price_showdetail, tv_numberOrder_showdetail, tv_description;
     private ImageView img_picFood, img_minus_btn, img_plus_btn;
@@ -25,20 +25,20 @@ public class ShowDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_detail);
+        setContentView(R.layout.activity_show_detail_2);
 
         managementCart = new ManagementCart(this);
         initView();
-        getBundle();
+        getBundle2();
     }
 
-    private void getBundle() {
-        object = (FoodDomain) getIntent().getSerializableExtra("object");
-        int drawableResourceId = this.getResources().getIdentifier(object.getPic(),"drawable",this.getPackageName());
+    private void getBundle2() {
+        food = (Food) getIntent().getSerializableExtra("object_2");
+        int drawableResourceId = this.getResources().getIdentifier(String.valueOf((food.getHinhAnh())),"drawable_2",this.getPackageName());
         Glide.with(this).load(drawableResourceId).into(img_picFood);
-        tv_title_showdetail.setText(object.getTitle());
-        tv_price_showdetail.setText("VND" + object.getFee());
-        tv_description.setText(object.getDescription());
+        tv_title_showdetail.setText(food.getTenFood());
+        tv_price_showdetail.setText("VND" + food.getGiaFood());
+        tv_description.setText(food.getMoTa());
         tv_numberOrder_showdetail.setText(String.valueOf(numberOrder));
 
         img_plus_btn.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +64,9 @@ public class ShowDetailActivity extends AppCompatActivity {
         tv_addToCart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                object.setNumberInCart(numberOrder);
-                managementCart.insertFood(object);
-                Intent intent = new Intent(ShowDetailActivity.this, Cart_Activity.class);
+                food.setNumberInCart(numberOrder);
+                managementCart.insertFood_2(food);
+                Intent intent = new Intent(ShowDetailActivity_2.this, Cart_Activity.class);
                 startActivity(intent);
             }
         });

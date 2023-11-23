@@ -40,6 +40,7 @@ public class Food {
         this.numberInCart = numberInCart;
     }
 
+
     public String getMaFood() {
         return maFood;
     }
@@ -96,12 +97,9 @@ public class Food {
         this.moTa = moTa;
     }
 
-    public byte[] getMota() {
-        return hinhAnh;
-    }
 
     public Uri hienthi(Context context) {
-        byte[] imageData = getMota();// Mảng byte chứa dữ liệu hình ảnh
+        byte[] imageData = getHinhAnh();// Mảng byte chứa dữ liệu hình ảnh
         String tempFileName = "temp_image.jpg";
         Uri uri;
         // Tạo đường dẫn tới tập tin ảnh tạm

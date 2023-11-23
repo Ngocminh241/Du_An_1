@@ -10,20 +10,21 @@
     android:elevation="3dp"
     tools:context=".List_Category.Pizza_List">
 
+
     <TextView
         android:id="@+id/tv_title_food"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginBottom="44dp"
         android:text="title"
         android:textColor="#373b54"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
-        app:layout_constraintStart_toEndOf="@+id/img_pic"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toEndOf="@+id/img_pic" />
 
     <ImageView
         android:id="@+id/img_pic"
@@ -41,7 +42,7 @@
         android:id="@+id/tv_fee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="22dp"
         android:text="0.0"
         android:textColor="#373b54"
         android:textSize="18sp"
@@ -49,25 +50,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_btn_add"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_food"
-        app:layout_constraintVertical_bias="0.324" />
+        app:layout_constraintStart_toEndOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
         android:text="VND"
         android:textColor="#FF3D00"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_title_food"
-        app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toEndOf="@+id/img_pic"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_food"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_food"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_food" />
 
     <TextView
         android:id="@+id/tv_btn_add"

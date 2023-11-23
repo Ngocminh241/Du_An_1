@@ -84,17 +84,17 @@ public class Cart_Activity extends AppCompatActivity {
         }
     }
     private void CalculateCart(){
-        double percenTax = 25;
+        double percenTax = 0.025;
         double deliver = 10;
 
         tax = Math.ceil((managementCart.gettotalFee()*percenTax)*100)/100;
         double total = Math.ceil((managementCart.gettotalFee()+tax+deliver)*100)/100;
         double itemTotal = Math.ceil(managementCart.gettotalFee()*100)/100;
 
-        tv_item_total_Fee.setText("$"+itemTotal);
-        tv_tax_Fee.setText("$"+tax);
-        tv_delivery_Services_Fee.setText("$"+deliver);
-        tv_total_Fee.setText("$"+total);
+        tv_item_total_Fee.setText(itemTotal+" VND");
+        tv_tax_Fee.setText(tax+" VND");
+        tv_delivery_Services_Fee.setText(deliver+" VND");
+        tv_total_Fee.setText(total+" VND");
 
     }
 }

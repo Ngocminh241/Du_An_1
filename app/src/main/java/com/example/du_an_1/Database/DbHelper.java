@@ -34,8 +34,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 "moTa TEXT NOT NULL)";
 
 
-        String addAdmin = "INSERT INTO User(maUser,maDN,matKhau,hoTen,sDT,vaiTro) VALUES(1,'admin','admin','Admin','admin',1)";
-        String addLoai = "INSERT INTO loai_Food(maLoai, tenLoai) VALUES(1,'Pizza'),"+"(2,'Burger'),"+"(3,'Hotdog'),"+"(4,'Drink'),"+"(5,'Donut')";
+        String addAdmin = "INSERT INTO User(maDN,matKhau,hoTen,sDT,vaiTro) VALUES('admin','admin','Admin','admin',1)";
+        String addLoai = "INSERT INTO loai_Food(maLoai, tenLoai) VALUES(0,'Pizza'),"+"(1,'Burger'),"+"(2,'Hotdog'),"+"(3,'Drink'),"+"(4,'Donut')";
         String addPizza = "INSERT INTO FOOD(maFood,maLoai,tenFood,giaFood,hinhAnh,moTa) VALUES('F001',1,'Pizza Chese',880,null,'abc')";
 
         db.execSQL(createTableUser);
