@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:gravity="center_horizontal"
-    tools:context=".Profile"
+    tools:context=".Support"
     android:orientation="vertical">
 
     <LinearLayout
@@ -39,7 +39,8 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center"
-                    android:text="@string/caidat"
+                    android:textStyle="bold"
+                    android:text="HỖ TRỢ"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -47,65 +48,206 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_function"
-            android:elevation="5dp"
-            android:paddingStart="13dp"
-            android:paddingEnd="10dp"
+            android:layout_height="600dp"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="20dp"
-                android:id="@+id/btn_change_pass"
+                android:paddingTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_function_profile"
+                android:layout_margin="10dp"
+                android:paddingEnd="3dp"
+                android:elevation="3dp"
+                android:background="@drawable/cart_background"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@string/content_description_image"
-                    android:src="@drawable/baseline_password_24" />
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/staff" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/notop_sans_regular"
-                    android:gravity="center_vertical"
-                    android:text="@string/doimatkhau"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nhân viên 01"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Name: Nguyễn Văn A"
+                        android:textSize="20dp" />
+
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#3D8FCF"
+                        android:drawableEnd="@drawable/baseline_phone_enabled_24"
+                        android:text="GỌI" />
+                </LinearLayout>
+
             </LinearLayout>
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingEnd="3dp"
+                android:elevation="3dp"
+                android:background="@drawable/cart_background"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/maid" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nhân viên 02"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Name: Hoàng Thị C"
+                        android:textSize="20dp" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#3D8FCF"
+                        android:drawableEnd="@drawable/baseline_phone_enabled_24"
+                        android:text="GỌI" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingEnd="3dp"
+                android:elevation="3dp"
+                android:background="@drawable/cart_background"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/maid" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nhân viên 03"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Name: Nguyễn Văn B"
+                        android:textSize="20dp" />
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#3D8FCF"
+                        android:drawableEnd="@drawable/baseline_phone_enabled_24"
+                        android:text="GỌI" />
+                </LinearLayout>
+
+            </LinearLayout>         <LinearLayout
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingEnd="3dp"
+            android:elevation="3dp"
+            android:background="@drawable/cart_background"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/staff" />
 
             <LinearLayout
-                android:id="@+id/tv_logout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_function_profile"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@string/content_description_image"
-                    android:src="@drawable/log_out_icon" />
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="6"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView7"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/notop_sans_regular"
-                    android:gravity="center_vertical"
-                    android:text="@string/dangxuat"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_height="wrap_content"
+                    android:text="Nhân viên 04"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Name: Nguyễn Công D"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#3D8FCF"
+                    android:drawableEnd="@drawable/baseline_phone_enabled_24"
+                    android:text="GỌI" />
             </LinearLayout>
+
         </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

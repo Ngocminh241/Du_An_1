@@ -9,22 +9,12 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Profile extends AppCompatActivity {
-
+public class Support extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile2);
-
-
-        LinearLayout layout_user_information = findViewById(R.id.layout_user_information);
-        layout_user_information.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, UserInformationActivity.class));
-            }
-        });
+        setContentView(R.layout.activity_support);
 
         bottomNavigation();
 
@@ -40,19 +30,19 @@ public class Profile extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Cart_Activity.class));
+                startActivity(new Intent(Support.this, Cart_Activity.class));
             }
         });
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Support.class));
+                startActivity(new Intent(Support.this, MainActivity.class));
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Profile.class));
+                startActivity(new Intent(Support.this, Profile.class));
 
             }
         });
@@ -60,13 +50,13 @@ public class Profile extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, MainActivity.class));
+                startActivity(new Intent(Support.this, MainActivity.class));
             }
         });
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, SettingActivity.class));
+                startActivity(new Intent(Support.this, SettingActivity.class));
             }
         });
     }

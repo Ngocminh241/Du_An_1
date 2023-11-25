@@ -41,6 +41,9 @@ public class Cart_Activity extends AppCompatActivity {
     private void bottomNavigation(){
         FloatingActionButton floatingActionButton = findViewById(R.id.float_cart_btn);
         LinearLayout homeBtn = findViewById(R.id.home_btn);
+        LinearLayout settingBtn = findViewById(R.id.setting_btn);
+        LinearLayout profile = findViewById(R.id.profile_btn);
+        LinearLayout support = findViewById(R.id.support_btn);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +55,25 @@ public class Cart_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Cart_Activity.this, MainActivity.class));
+            }
+        });
+        support.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Cart_Activity.this, Support.class));
+            }
+        });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Cart_Activity.this, Profile.class));
+
+            }
+        });
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Cart_Activity.this, SettingActivity.class));
             }
         });
     }

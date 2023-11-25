@@ -14,12 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingActivity extends AppCompatActivity {
-    LinearLayout tv_logout;
+    LinearLayout tv_logout, btn_change_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        btn_change_pass = findViewById(R.id.btn_change_pass);
+        btn_change_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this, Change_Pass.class));
+            }
+        });
         tv_logout = findViewById(R.id.tv_logout);
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +77,7 @@ public class SettingActivity extends AppCompatActivity {
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this, MainActivity.class));
+                startActivity(new Intent(SettingActivity.this, Support.class));
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
