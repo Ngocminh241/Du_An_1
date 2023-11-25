@@ -48,7 +48,6 @@ public class Pizza_List extends AppCompatActivity {
 
         list = new ArrayList<>();
         food_dao = new Food_DAO(this);
-        
 
         recyclerViewPizza();
         recyclerViewCategory();

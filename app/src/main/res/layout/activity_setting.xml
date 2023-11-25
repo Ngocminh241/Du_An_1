@@ -14,15 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="360sp"
+            android:layout_width="match_parent"
             android:layout_height="47sp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:background="@drawable/bg_function"
             android:elevation="10dp"
             android:orientation="vertical">
@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="47sp"
-                android:background="#FF9800"
+                android:background="@drawable/bg_function_title"
                 android:orientation="vertical">
 
                 <TextView
@@ -46,12 +46,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="360sp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_function"
             android:elevation="5dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -118,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:backgroundTint="#f6f6f6"
-            app:fabCradleMargin="8dp"
+            app:fabCradleMargin="14dp"
             app:fabCradleRoundedCornerRadius="50dp"
             app:fabCradleVerticalOffset="6dp">
 
