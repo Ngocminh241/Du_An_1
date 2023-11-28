@@ -7,14 +7,15 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:gravity="center_horizontal"
-    tools:context=".Support"
+    tools:context=".ChinhSachBaoMat"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="30dp"
+        android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,217 +40,147 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="HỖ TRỢ"
+                    android:text="@string/chinhsach"
                     android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:paddingTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:paddingEnd="3dp"
-                android:elevation="3dp"
-                android:background="@drawable/cart_background"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/staff" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_weight="6"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nhân viên 01"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Name: Nguyễn Văn A"
-                        android:textSize="20dp" />
-
-                    <Button
-                        android:id="@+id/button1"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#3D8FCF"
-                        android:drawableEnd="@drawable/baseline_phone_enabled_24"
-                        android:text="GỌI" />
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:paddingTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:paddingEnd="3dp"
-                android:elevation="3dp"
-                android:background="@drawable/cart_background"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/maid" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_weight="6"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nhân viên 02"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Name: Hoàng Thị C"
-                        android:textSize="20dp" />
-
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#3D8FCF"
-                        android:drawableEnd="@drawable/baseline_phone_enabled_24"
-                        android:text="GỌI" />
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:paddingTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:paddingEnd="3dp"
-                android:elevation="3dp"
-                android:background="@drawable/cart_background"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/maid" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_weight="6"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nhân viên 03"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Name: Nguyễn Văn B"
-                        android:textSize="20dp" />
-
-                    <Button
-                        android:id="@+id/button3"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#3D8FCF"
-                        android:drawableEnd="@drawable/baseline_phone_enabled_24"
-                        android:text="GỌI" />
-                </LinearLayout>
-
-            </LinearLayout>         <LinearLayout
-            android:paddingTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:paddingEnd="3dp"
-            android:elevation="3dp"
-            android:background="@drawable/cart_background"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/staff" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="6"
+                android:layout_margin="5sp"
+                android:paddingBottom="80sp"
                 android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.1 Chính sách tri ân khách hàng"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Một trong những chính sách bán hàng được nhiều nhà hàng lựa chọn áp dụng nhất là chính sách tri ân khách hàng. Chính sách này thường được sử dụng nhiều tại các nhà hàng sang trọng. Khách hàng khi sử dụng gói tri ân khách hàng sẽ nhận được những phần quà và ưu đãi vô cùng hấp dẫn. Với mỗi đối tượng khách hàng khác nhau sẽ được áp dụng mỗi chương trình tri ân khách hàng khác nhau tùy thuộc vào từng điều kiện cụ thể." />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.2 Chính sách bán hàng sử dụng thẻ tích điểm"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Khi thường xuyên mua và sử dụng sản phẩm, dịch vụ tại các nhà hàng bạn sẽ biết tới chính sách mua hàng bằng thẻ tích điểm. Chính sách này thường được áp dụng khi khách hàng đến mua sắm tại nhà hàng. Khách hàng sử dụng dịch vụ càng nhiều thì số điểm tích được càng lớn. Từ đó họ có thể nhận được vô vàn ưu đãi đặc biệt hấp dẫn. Đây được coi là chính sách vô cùng hiệu quả trong việc giúp các doanh nghiệp bán hàng cực kỳ nhanh chóng." />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1.3 Chính sách bán hàng đa cấp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Với phương pháp bán hàng đa cấp, chủ doanh nghiệp sẽ đưa ra một vài phương thức khuyến mãi hấp dẫn dành cho người mua hàng cũ nếu thành công giới thiệu khách hàng mới mua và sử dụng sản phẩm. Chính sách này không những giúp doanh nghiệp nhà hàng tiết kiệm được một khoản lớn trong việc quảng cáo mà còn nhận lại được nhiều đối tượng khách hàng tiềm năng.
+
+" />
 
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nhân viên 04"
-                    android:textSize="22sp"
+                    android:text="1.4 Chính sách bán hàng giảm giá"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Name: Nguyễn Công D"
-                    android:textSize="20dp" />
+                    android:text="Bên cạnh 4 chính sách đã kể trên, chính sách bán hàng giảm giá cũng là chiến lược bán hàng mà không doanh nghiệp nào nên bỏ qua. Đối với chính sách này, các doanh nghiệp sẽ chủ động thực hiện các chương trình giảm giá, khuyến mãi cho các sản phẩm, dịch vụ theo từng mốc thời gian cụ thể cho từng đối tượng khách hàng khác nhau. Điều này giúp doanh nghiệp thu hút được lượng lớn khách hàng tham gia. Và thúc đẩy doanh số vô cùng hiệu quả." />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="120dp"
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#3D8FCF"
-                    android:drawableEnd="@drawable/baseline_phone_enabled_24"
-                    android:text="GỌI" />
-            </LinearLayout>
+                    android:text="1.5 Chính sách bán hàng theo combo"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hình thức bán hàng combo sẽ “mê hoặc” khách hàng mua nhiều sản phẩm hơn nữa trong một lượt mua hàng. Chính sách này được áp dụng nhiều nhất tại các cửa hàng mỹ phẩm và ăn uống. Với mục đích đẩy nhanh doanh số sản phẩm được bán ra.
+Bên cạnh phương thức bán hàng theo combo, chủ doanh nghiệp có thể bán kèm các sản phẩm có liên quan để kích thích nhu cầu mua thêm sản phẩm của khách hàng.
+" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="2. Nguyên tắc bảo mật thông tin" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.1. Chỉ thu thập thông tin cho những mục đích được nêu tại mục 3 của Chính sách này;" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.2. Thông báo cho Khách hàng mục đích sử dụng thông tin cần thu thập và chỉ sử dụng thông tin cho mục đích này, ngoại trừ những trường hợp ngoại lệ theo Chính sách này, việc sử dụng thông tin cho mục đích khác phải được thông báo và được sự đồng ý của Khách hàng;" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.3. Chính sách này áp dụng đối với tổng thể các Dịch vụ của Ussina, nhưng tùy từng thời điểm, đối với từng Dịch vụ hoặc từng phần Dịch vụ cụ thể, tùy thuộc đặc thù và yêu cầu cần thiết của Dịch vụ đó Ussina có thể bổ sung/điều chỉnh các nội dung liên quan đến Chính sách này để áp dụng riêng cho những phần Dịch vụ cụ thể đó;" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.4. Tùy tình hình, nhu cầu bảo mật thực tế, Ussina có thể điều chỉnh Chính sách này mà không cần thông báo hay được sự đồng ý của Khách hàng. Việc cập nhật nội dung Chính sách được quy định tại mục 15 của Chính sách này;" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.5. Bất kỳ thời điểm nào Khách hàng truy cập, sử dụng Dịch vụ do Ussina cung cấp, tức là Khách hàng đồng ý với các điều khoản mà Ussina quy định trong Chính sách này (bao gồm cả các phần bổ sung, sửa đổi tùy từng thời điểm);" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.6. Ussina sẽ luôn đưa ra tùy chọn về việc quyết định cung cấp hay không cung cấp Thông tin đối với Khách hàng. Trường hợp Khách hàng lựa chọn không cung cấp hoặc cung cấp không đầy đủ Thông tin thì có thể sẽ có một số Dịch vụ, giao dịch không thể thực hiện được hoặc quyền lợi của Khách hàng sẽ bị những hạn chế nhất định." />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2.7. Nghĩa vụ và trách nhiệm pháp lý của Ussina liên quan đến việc bảo mật thông tin cá nhân Khánh hàng chỉ trọn vẹn và đầy đủ khi Khách hàng đã tuân thủ đầy đủ các nguyên tắc và quy định của Chính sách này." />
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"

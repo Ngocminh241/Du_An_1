@@ -35,9 +35,9 @@ public class User_DAO {
 
     public long updatePass(User obj) {
         ContentValues values = new ContentValues();
-        values.put("hoTen", obj.getHoTen());
+        values.put("maDN", obj.getMaDN());
         values.put("matKhau", obj.getMatKhau());
-        return db.update("User", values, "maUser = ?", new String[]{String.valueOf(obj.getMaUser())});
+        return db.update("User", values, "maDN = ?", new String[]{String.valueOf(obj.getMaDN())});
     }
 
     public long delete(String id) {

@@ -9,31 +9,16 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Profile extends AppCompatActivity {
-    LinearLayout layout_user_information, account_btn_layout_policy;
-
+public class ChinhSachBaoMat extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile2);
-        account_btn_layout_policy = findViewById(R.id.account_btn_layout_policy);
-        account_btn_layout_policy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, ChinhSachBaoMat.class));
-            }
-        });
-        layout_user_information = findViewById(R.id.layout_user_information);
-        layout_user_information.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, UserInformationActivity.class));
-            }
-        });
+        setContentView(R.layout.activity_chinh_sach_bao_mat);
+
+
 
         bottomNavigation();
-
     }
     private void bottomNavigation(){
         FloatingActionButton floatingActionButton = findViewById(R.id.float_cart_btn);
@@ -46,19 +31,19 @@ public class Profile extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Cart_Activity.class));
+                startActivity(new Intent(ChinhSachBaoMat.this, Cart_Activity.class));
             }
         });
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Support.class));
+                startActivity(new Intent(ChinhSachBaoMat.this, Support.class));
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Profile.class));
+                startActivity(new Intent(ChinhSachBaoMat.this, Profile.class));
 
             }
         });
@@ -66,13 +51,13 @@ public class Profile extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, MainActivity.class));
+                startActivity(new Intent(ChinhSachBaoMat.this, MainActivity.class));
             }
         });
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, SettingActivity.class));
+                startActivity(new Intent(ChinhSachBaoMat.this, SettingActivity.class));
             }
         });
     }

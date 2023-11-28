@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="87sp"
             android:layout_gravity="center"
-
             android:background="@drawable/bg_function"
             android:elevation="10dp"
             android:orientation="vertical">
