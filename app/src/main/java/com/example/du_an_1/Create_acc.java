@@ -24,7 +24,7 @@ public class Create_acc extends AppCompatActivity {
     Button btn_login_acc, btn_create_acc;
     EditText ed_username_input_create, ed_sdt_input_create, ed_password_input_create, ed_re_password_input_create, ed_userFullname_input_create;
     Context context;
-    String fullName, phoneNumber, userName, passWord;
+    String fullName, phoneNumber, userName, passWord, confirm;
     User user;
     User_DAO dao_user;
     Dialog dialog;
@@ -71,21 +71,23 @@ public class Create_acc extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                fullName = ed_userFullname_input_create.getText().toString();
-                phoneNumber = ed_sdt_input_create.getText().toString();
-                userName = ed_username_input_create.getText().toString();
-                passWord = ed_password_input_create.getText().toString();
+                fullName = ed_userFullname_input_create.getText().toString().trim();
+                phoneNumber = ed_sdt_input_create.getText().toString().trim();
+                userName = ed_username_input_create.getText().toString().trim();
+                passWord = ed_password_input_create.getText().toString().trim();
+                confirm = ed_re_password_input_create.getText().toString().trim();
                 user = new User();
                 user.setHoTen(fullName);
                 user.setsDT(phoneNumber);
                 user.setMaDN(userName);
                 user.setMatKhau(passWord);
                 user.setVaiTro(0);
-                dao_user.insert(user);
-                dialog.dismiss();
-                Intent intent = new Intent(Create_acc.this, Login.class);
-                startActivity(intent);
-                Toast.makeText(Create_acc.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+//                dao_user.insert(user);
+//                dialog.dismiss();
+//                Intent intent = new Intent(Create_acc.this, Login.class);
+//                startActivity(intent);
+//                Toast.makeText(Create_acc.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                validate();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -105,10 +107,18 @@ public class Create_acc extends AppCompatActivity {
     public int validate() {
         int check = 1;
         if (ed_userFullname_input_create.getText().length() == 0 || ed_sdt_input_create.getText().length() == 0 || ed_username_input_create.getText().length() == 0 || ed_password_input_create.getText().length() == 0 || ed_re_password_input_create.getText().length() == 0) {
-            Toast.makeText(context, "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Create_acc.this, "Bạn phải nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             check = -1;
+        }else if(!confirm.equals(passWord)){
+            Toast.makeText(Create_acc.this, "Mật khẩu xác nhận không hợp lệ!", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }else {
+            dao_user.insert(user);
+            dialog.dismiss();
+            Intent intent = new Intent(Create_acc.this, Login.class);
+            startActivity(intent);
+            Toast.makeText(Create_acc.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
         }
         return check;
-
     }
 }
