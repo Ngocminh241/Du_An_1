@@ -5,8 +5,9 @@ import android.net.Uri;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.Serializable;
 
-public class Food {
+public class Food implements Serializable {
     private String maFood;
     private int maLoai;
     private String tenFood;
@@ -115,6 +116,8 @@ public class Food {
             return null;
         }
     }
+
+
 }
 
 

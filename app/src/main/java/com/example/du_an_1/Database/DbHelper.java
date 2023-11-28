@@ -3,6 +3,8 @@ package com.example.du_an_1.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
 
@@ -54,5 +56,9 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL("drop table if exists FOOD");
             onCreate(db);
         }
+    }
+
+    public static Bitmap convertByteArrayToBitmap(byte[] image){
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 }

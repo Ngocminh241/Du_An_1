@@ -61,6 +61,8 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.ViewHolder> 
                         changeNumberItemsListener.changed();
                     }
                 });
+
+
             }
         });
 

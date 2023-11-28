@@ -46,6 +46,9 @@
             android:name=".ShowDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ShowDetailActivity_2"
+            android:exported="false" />
+        <activity
             android:name=".Create_acc"
             android:exported="false" />
         <activity

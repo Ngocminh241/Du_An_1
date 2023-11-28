@@ -1,6 +1,9 @@
 package com.example.du_an_1;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,18 +12,29 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.du_an_1.Adapter.FoodAdapter;
+import com.example.du_an_1.DAO.Food_DAO;
+import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.Food;
+import com.example.du_an_1.Database.DbHelper;
 import com.example.du_an_1.Domain.FoodDomain;
 import com.example.du_an_1.Helper.ManagementCart;
+
+import java.sql.Blob;
+import java.util.List;
 
 public class ShowDetailActivity_2 extends AppCompatActivity {
     private TextView tv_addToCart_btn;
     private TextView tv_title_showdetail, tv_price_showdetail, tv_numberOrder_showdetail, tv_description;
-    private ImageView img_picFood, img_minus_btn, img_plus_btn;
+    private ImageView img_picFood;
+    private ImageView img_minus_btn;
+    private ImageView img_plus_btn;
     private FoodDomain object;
     private Food food;
+    List<Food> list;
     private ManagementCart managementCart;
     int numberOrder = 1;
+    Food_DAO food_dao ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +47,21 @@ public class ShowDetailActivity_2 extends AppCompatActivity {
     }
 
     private void getBundle2() {
-        food = (Food) getIntent().getSerializableExtra("object_2");
-        int drawableResourceId = this.getResources().getIdentifier(String.valueOf((food.getHinhAnh())),"drawable_2",this.getPackageName());
-        Glide.with(this).load(drawableResourceId).into(img_picFood);
-        tv_title_showdetail.setText(food.getTenFood());
-        tv_price_showdetail.setText("VND" + food.getGiaFood());
-        tv_description.setText(food.getMoTa());
+        Intent i = getIntent();
+        String fd = i.getStringExtra("object_2");
+//        food_dao.getAll();
+        food_dao = new Food_DAO(this);
+//        User thuThu = user_dao.getMaDN(user);
+//        tv_name.setText("Hi " + username);
+        tv_title_showdetail.setText(food_dao.getTenFood(fd));
+        tv_price_showdetail.setText("VND " + food_dao.getGIA(fd));
+        tv_description.setText(food_dao.getMOTA(fd));
+
+            byte[] imgdata = i.getByteArrayExtra("image_data");
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imgdata, 0, imgdata.length);
+            img_picFood.setImageBitmap(bitmap);
         tv_numberOrder_showdetail.setText(String.valueOf(numberOrder));
+
 
         img_plus_btn.setOnClickListener(new View.OnClickListener() {
             @Override

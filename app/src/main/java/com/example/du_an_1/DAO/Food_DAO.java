@@ -1,19 +1,27 @@
 package com.example.du_an_1.DAO;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.util.Log;
 
 import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.Database.DbHelper;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Food_DAO {
     DbHelper dbHelper;
     SQLiteDatabase db;
+
+    Food food;
 
     public Food_DAO(Context context) {
         dbHelper = new DbHelper(context);
@@ -70,6 +78,99 @@ public class Food_DAO {
         }
         return list;
     }
+
+//    public Food getID(int id) {
+//        String sql = "SELECT * FROM User WHERE maUser=?";
+//        List<Food> list = getAll(sql, String.valueOf(id));
+//        return list.get(0);
+//    }
+    String tenFD;
+    public String getTenFood(String tenFood) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT tenFood FROM FOOD WHERE maFood=?", new String[] {String.valueOf(tenFood)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    tenFD = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return tenFD;
+    }
+
+    String mT;
+    public String getMOTA(String MT) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT moTa FROM FOOD WHERE maFood=?", new String[] {String.valueOf(MT)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    mT = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return mT;
+    }
+
+    int giaFOOD;
+    public String getGIA(String gia) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT giaFood FROM FOOD WHERE maFood=?", new String[] {String.valueOf(gia)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    giaFOOD = Integer.parseInt(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return String.valueOf(giaFOOD);
+    }
+
+    byte[] hinh;
+    public byte[] getAnh(String HA) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT hinhAnh FROM FOOD WHERE maFood=?", new String[] {String.valueOf(HA)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    hinh = String.valueOf((cursor.getBlob(0))).getBytes();
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return hinh;
+    }
+
+    public Uri hienthi(Context context) {
+        byte[] imageData = food.getHinhAnh();// Mảng byte chứa dữ liệu hình ảnh
+        String tempFileName = "temp_image.jpg";
+        Uri uri;
+        // Tạo đường dẫn tới tập tin ảnh tạm
+        File tempFile = new File(context.getCacheDir(), tempFileName);
+        // Ghi dữ liệu blob vào tập tin ảnh tạm
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
+            fileOutputStream.write(imageData);
+            fileOutputStream.close();
+            uri = Uri.fromFile(tempFile);
+            return uri;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
 //    public List<DTO_sp> getAllA() {
 //        List<DTO_sp> list = new ArrayList<>();
 //        Cursor c = db.rawQuery("SELECT * FROM tb_SanPham INNER JOIN tb_loaihang on tb_SanPham.MaLoai = tb_loaihang.MaLoai", null);
