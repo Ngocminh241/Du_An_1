@@ -39,7 +39,28 @@ public class Food_DAO {
         return db.insert("FOOD", null, values);
     }
 
+    //xóa mềm
+    public int KhoiphucRow(Food SP) {
+        ContentValues values = new ContentValues();
+        values.put("trangThai", 0);
+
+        String[] index = new String[]{
+                String.valueOf(SP.getMaFood())
+
+        };
+        return db.update("FOOD", values, "maFood=?", index);
+    }
     public int DeleteRow(Food SP) {
+        ContentValues values = new ContentValues();
+        values.put("trangThai", 1);
+
+        String[] index = new String[]{
+                String.valueOf(SP.getMaFood())
+
+        };
+        return db.update("FOOD", values, "maFood=?", index);
+    }
+    public int Deletevinhvien(Food SP) {
         String[] index = new String[]{
                 String.valueOf(SP.getMaFood())
         };
@@ -60,8 +81,26 @@ public class Food_DAO {
         return db.update("FOOD", values, "maFood=?", index);
     }
 
+    public List<Food> getAll(int trangThai) {
+        List<Food> list = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai where trangthai =" + trangThai, null);
+        if (c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                String maFood = c.getString(0);
+                int maLoai = c.getInt(1);
+                String tenFood = c.getString(2);
+                int giaFood = c.getInt(3);
+                byte[] hinhAnh = c.getBlob(4);
+                String moTa = c.getString(5);
+                int trangthai = c.getInt(6);
+                list.add(new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa, trangthai));
+            } while (c.moveToNext());
+        }
+        return list;
+    }
 
-    public List<Food> getAll() {
+    public List<Food> getAllA() {
         List<Food> list = new ArrayList<>();
         Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai", null);
         if (c != null && c.getCount() > 0) {
@@ -73,7 +112,8 @@ public class Food_DAO {
                 int giaFood = c.getInt(3);
                 byte[] hinhAnh = c.getBlob(4);
                 String moTa = c.getString(5);
-                list.add(new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa));
+                int trangthai = c.getInt(6);
+                list.add(new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa, trangthai));
             } while (c.moveToNext());
         }
         return list;

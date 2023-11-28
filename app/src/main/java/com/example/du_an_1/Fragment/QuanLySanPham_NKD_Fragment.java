@@ -5,9 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.du_an_1.Adapter.FoodAdapter_ql;
+import com.example.du_an_1.DAO.Food_DAO;
+import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +33,11 @@ public class QuanLySanPham_NKD_Fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    FoodAdapter_ql adapter_sp;
+    RecyclerView rc_list;
+    List<Food> list;
+    Food_DAO dao_sp;
 
     public QuanLySanPham_NKD_Fragment() {
         // Required empty public constructor
@@ -61,5 +75,21 @@ public class QuanLySanPham_NKD_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_quan_ly_san_pham__n_k_d_, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        rc_list = view.findViewById(R.id.rcv_sanpham_ngung);
+        dao_sp = new Food_DAO(getContext());
+        list = dao_sp.getAll(1);
+        adapter_sp = new FoodAdapter_ql(view.getContext(), list,1);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rc_list.setAdapter(adapter_sp);
+        rc_list.setLayoutManager(linearLayoutManager);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void loadData() {
+        adapter_sp.notifyDataSetChanged();
     }
 }

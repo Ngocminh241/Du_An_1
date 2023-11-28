@@ -112,7 +112,7 @@ public class Pizza_List extends AppCompatActivity {
 //        food.add(new Food("F002",1,"Pizza sauce", 970,null,"abcd"));
 //        food.add(new Food("F003",2,"Pizza sauce", 3970,null,"abcd"));
 //        food.add(new Food("F004",1,"Pizza sauce_2", 1970,null,"abcd"));
-        list = food_dao.getAll();
+        list = food_dao.getAll(0);
         adapter_2 = new FoodAdapter(this,list);
 //        adapter_2 = new FoodAdapter(this, food);
         rcv_pizza.setAdapter(adapter_2);

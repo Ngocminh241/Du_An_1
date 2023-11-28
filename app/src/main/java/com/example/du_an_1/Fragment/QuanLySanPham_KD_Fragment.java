@@ -118,8 +118,8 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
         FloatingActionButton floatThem = view.findViewById(R.id.fab);
         recyclerView = view.findViewById(R.id.rcv_SP);
         navigationQuanLy = (NavigationQuanLy) getContext();
-        list = dao_food.getAll();
-        adapter_food = new FoodAdapter_ql(view.getContext(), list);
+        list = dao_food.getAll(0);
+        adapter_food = new FoodAdapter_ql(view.getContext(), list,0);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter_food);
@@ -189,106 +189,6 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
-//        ed_loaiSp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final int[] i = {0};
-//                AlertDialog.Builder builder = new AlertDialog.Builder(dialog.getContext());
-//                LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
-//                View view = inflater.inflate(R.layout.dialog_them_loaihang, null);
-//                builder.setView(view);
-//                Dialog dialogLoaiSP = builder.create();
-//                dialogLoaiSP.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                dialogLoaiSP.show();
-//                ListView listLoaiHang = view.findViewById(R.id.lis_loaiSP);
-//                EditText themLoai = view.findViewById(R.id.txt_themLoai);
-//                ImageButton add = view.findViewById(R.id.ibtn_addLoai);
-//                loaiHang = new DAO_LoaiHang(getContext());
-//                listHang = loaiHang.getAll();
-//                adapterLoaiSP = new Adapter_loaiSP(getContext(), listHang);
-////                layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-////                listLoaiHang.setLayoutManager(layoutManager);
-//                listLoaiHang.setAdapter(adapterLoaiSP);
-//                themLoai.setVisibility(View.GONE);
-//                add.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        themLoai.setVisibility(View.VISIBLE);
-//                        add.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                if (!themLoai.getText().toString().isEmpty()) {
-//                                    dto_loaiHang = new DTO_LoaiHang();
-//                                    dto_loaiHang.setTenLoai(themLoai.getText().toString());
-//                                    if (loaiHang.AddRow(dto_loaiHang) > 0) {
-//                                        listHang.clear();
-//                                        listHang.addAll(loaiHang.getAll());
-//                                        adapterLoaiSP.notifyDataSetChanged();
-//                                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-//                                        dialogLoaiSP.dismiss();
-//                                        getID[0] = listHang.get(listHang.size() - 1);
-//                                        ed_loaiSp.setText(getID[0].getTenLoai());
-//                                    } else {
-//                                        Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                } else {
-//                                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-//                    }
-//                });
-//                // Xử lý sự kiện click của người dùng
-//                listLoaiHang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        if (i[0] == 0) {
-//                            getID[0] = listHang.get(position);
-//                            ed_loaiSp.setText(getID[0].getTenLoai());
-//                            dialogLoaiSP.dismiss();
-//                        }
-//                    }
-//                });
-//                listLoaiHang.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//                    @Override
-//                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                        Log.e(TAG, "onItemLongClick: đang ấn giữa" );
-//                        i[0] = 1;
-//                        dto_loaiHang = listHang.get(position);
-//                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
-//                        builder.setTitle("Thông báo");
-//                        builder.setIcon(R.drawable.baseline_warning_amber_24);
-//                        builder.setMessage("Cảnh báo nếu thực hiện xóa " + "'" + dto_loaiHang.getTenLoai() + "'" + " những sản phẩm thuộc " + dto_loaiHang.getTenLoai() + " sẽ bị mất.");
-//                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                DAO_LoaiHang hang = new DAO_LoaiHang(getContext());
-////                getID[0] = listHang.get(position);
-//                                if (hang.DeleteRow(listHang.get(position)) > 0) {
-//                                    Toast.makeText(getContext(), "Đã xóa thành công", Toast.LENGTH_SHORT).show();
-//                                    listHang.clear();
-//                                    listHang.addAll(loaiHang.getAll());
-//                                    adapterLoaiSP.notifyDataSetChanged();
-//                                    list.clear();
-//                                    list.addAll(dao_sp.getAll(0));
-//                                    adapter_sp.notifyDataSetChanged();
-//                                    dialog.dismiss();
-//                                }
-//                            }
-//                        });
-//                        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//                        Dialog dialog = builder.create();
-//                        dialog.show();
-//                        return false;
-//                    }
-//                });
-//            }
-//        });
         sp_loaiSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -334,20 +234,20 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                if (checkten() == 0) {
-//                    if (id_sp != "") {
+                if (checkten() == 0) {
+                    if (id_sp != "") {
                 if (themSP() > 0) {
                     dialog.dismiss();
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     dialog1.dismiss();
-//                        } else {
-//                            Toast.makeText(Pizza_List.this, "Mã sản phẩm đã tồn tại vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else {
-//                        Toast.makeText(Pizza_List.this, "Không để trống mã sản phẩm", Toast.LENGTH_SHORT).show();
-//                    }
-//                } else {
-//                    Toast.makeText(Pizza_List.this, "Tên sản phẩm đã tồn tại", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Mã sản phẩm đã tồn tại vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Không để trống mã sản phẩm", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Tên sản phẩm đã tồn tại", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -392,7 +292,7 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
     }
     public void loadData() {
         list.clear();
-        list.addAll(dao_food.getAll());
+        list.addAll(dao_food.getAll(0));
         adapter_food.notifyDataSetChanged();
     }
     public long themSP() {
@@ -405,11 +305,29 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
         food.setMoTa(moTa);
         food.setHinhAnh(anh);
         int maND = 1;
-//        checkten();
+        checkten();
         a = dao_food.ADDSanPham(food);
         list.clear();
-        list.addAll(dao_food.getAll());
+        list.addAll(dao_food.getAll(0));
         adapter_food.notifyDataSetChanged();
         return a;
+    }
+    private int checkten() {
+        int a = 0;
+        for (Food sp : list) {
+            if (tensp.equals(sp.getTenFood())) {
+                return 2;
+            }
+        }
+        return a;
+    }
+    public List<Food> loc(List<Food> list) {
+        List<Food> listCheck = new ArrayList<>();
+        for (Food sp : list) {
+            if (sp.getTrangthai() == 0) {
+                listCheck.add(sp);
+            }
+        }
+        return listCheck;
     }
 }

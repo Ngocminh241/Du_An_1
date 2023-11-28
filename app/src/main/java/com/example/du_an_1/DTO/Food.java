@@ -14,6 +14,7 @@ public class Food implements Serializable {
     private int giaFood;
     private byte[] hinhAnh;
     private String moTa;
+    private int trangthai;
     private int numberInCart;
 
 
@@ -21,17 +22,18 @@ public class Food implements Serializable {
     public Food(){
 
     }
-    public Food(String maFood, int maLoai, String tenFood, int giaFood, byte[] hinhAnh, String moTa) {
+    public Food(String maFood, int maLoai, String tenFood, int giaFood, byte[] hinhAnh, String moTa, int trangthai) {
         this.maFood = maFood;
         this.maLoai = maLoai;
         this.tenFood = tenFood;
         this.giaFood = giaFood;
         this.hinhAnh = hinhAnh;
         this.moTa = moTa;
+        this.trangthai = trangthai;
     }
 
 
-    public Food(String maFood, int maLoai, String tenFood, int giaFood, byte[] hinhAnh, String moTa, int numberInCart) {
+    public Food(String maFood, int maLoai, String tenFood, int giaFood, byte[] hinhAnh, String moTa, int trangthai, int numberInCart) {
         this.maFood = maFood;
         this.maLoai = maLoai;
         this.tenFood = tenFood;
@@ -41,6 +43,14 @@ public class Food implements Serializable {
         this.numberInCart = numberInCart;
     }
 
+
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
 
     public String getMaFood() {
         return maFood;

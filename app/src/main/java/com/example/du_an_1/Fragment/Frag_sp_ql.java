@@ -39,9 +39,9 @@ public class Frag_sp_ql extends Fragment {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if (position == 0) {
-                    tab.setText("Đang kinh doanh");
+                    tab.setText("Are Trading");
                 } else {
-                    tab.setText("Ngừng kinh doanh");
+                    tab.setText("Stop Business");
                 }
             }
         });

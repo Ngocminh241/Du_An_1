@@ -24,8 +24,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.User;
+import com.example.du_an_1.Fragment.Frag_sp_ql;
 import com.example.du_an_1.Fragment.QuanLyHoaDonFragment;
-import com.example.du_an_1.Fragment.QuanLySanPham_KD_Fragment;
+import com.example.du_an_1.Fragment.QuanLyLoaiSanPham;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayOutputStream;
@@ -54,6 +55,8 @@ public class NavigationQuanLy extends AppCompatActivity {
         getSupportActionBar().setTitle("Quản Lý Hóa Đơn");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.menunavbar);
+        //xet icon ve mau ban goc
+        navigationView.setItemIconTintList(null);
         // Gọi hiển thị tên với avatar người dùng // nhận dữ liệu từ login
         header = navigationView.getHeaderView(0);
         user_dao = new User_DAO(this);
@@ -76,10 +79,13 @@ public class NavigationQuanLy extends AppCompatActivity {
                 if (item.getItemId() == R.id.QLHome) {
                     toolbar.setTitle("Quản lý hóa đơn");
                     fragment = new QuanLyHoaDonFragment();
-                } else if (item.getItemId() == R.id.QLSP) {
+                } else if (item.getItemId() == R.id.QLLSP) {
+                    toolbar.setTitle("Quản lý loại sản phẩm");
+                    fragment = new QuanLyLoaiSanPham()  ;
+                }else if (item.getItemId() == R.id.QLSP) {
                     toolbar.setTitle("Quản lý sản phẩm");
-                    fragment = new QuanLySanPham_KD_Fragment();
-                } else if (item.getItemId() == R.id.QLThoat) {
+                    fragment = new Frag_sp_ql();
+                }else if (item.getItemId() == R.id.QLThoat) {
                     openDialog_DangXuat();
                 }
                 if (fragment != null) {

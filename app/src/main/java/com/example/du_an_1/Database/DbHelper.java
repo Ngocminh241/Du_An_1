@@ -33,12 +33,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 "tenFood TEXT NOT NULL," +
                 "giaFood INTEGER NOT NULL," +
                 "hinhAnh BLOB,"+
-                "moTa TEXT NOT NULL)";
+                "moTa TEXT NOT NULL," +
+                "trangThai INTEGER DEFAULT (0))";
 
 
         String addAdmin = "INSERT INTO User(maDN,matKhau,hoTen,sDT,vaiTro) VALUES('admin','admin','Admin','admin',1)";
         String addLoai = "INSERT INTO loai_Food(maLoai, tenLoai) VALUES(0,'Pizza'),"+"(1,'Burger'),"+"(2,'Hotdog'),"+"(3,'Drink'),"+"(4,'Donut')";
-        String addPizza = "INSERT INTO FOOD(maFood,maLoai,tenFood,giaFood,hinhAnh,moTa) VALUES('F001',1,'Pizza Chese',880,null,'abc')";
+        String addPizza = "INSERT INTO FOOD(maFood,maLoai,tenFood,giaFood,hinhAnh,moTa,trangThai) VALUES('F001',1,'Pizza Chese',880,null,'abc',0)";
 
         db.execSQL(createTableUser);
         db.execSQL(createTableLoaiFood);
