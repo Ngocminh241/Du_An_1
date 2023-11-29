@@ -83,7 +83,7 @@ public class Food_DAO {
 
     public List<Food> getAll(int trangThai) {
         List<Food> list = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai where trangthai =" + trangThai, null);
+        Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai where trangThai =" + trangThai, null);
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
             do {
@@ -114,6 +114,24 @@ public class Food_DAO {
                 String moTa = c.getString(5);
                 int trangthai = c.getInt(6);
                 list.add(new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa, trangthai));
+            } while (c.moveToNext());
+        }
+        return list;
+    }
+    public List<Food> getAllB(int maLoai) {
+        List<Food> list = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai where food.trangThai = 0 AND food.maLoai=" + maLoai, null);
+        if (c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                String maFood = c.getString(0);
+                int mLoai = c.getInt(1);
+                String tenFood = c.getString(2);
+                int giaFood = c.getInt(3);
+                byte[] hinhAnh = c.getBlob(4);
+                String moTa = c.getString(5);
+                int trangthai = c.getInt(6);
+                list.add(new Food(maFood, mLoai, tenFood, giaFood, hinhAnh, moTa, trangthai));
             } while (c.moveToNext());
         }
         return list;
@@ -174,6 +192,38 @@ public class Food_DAO {
         }
         return String.valueOf(giaFOOD);
     }
+    int theLoai;
+    public String getLoai(int loai) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT maLoai FROM FOOD WHERE maLoai=?", new String[] {String.valueOf(loai)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    theLoai = Integer.parseInt(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return String.valueOf(theLoai);
+    }
+    int TT;
+    public String getTT(int tt) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT trangThai FROM FOOD WHERE maLoai=?", new String[] {String.valueOf(tt)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    TT = Integer.parseInt(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return String.valueOf(TT);
+    }
 
     byte[] hinh;
     public byte[] getAnh(String HA) {
@@ -210,24 +260,5 @@ public class Food_DAO {
         }
     }
 
-
-//    public List<DTO_sp> getAllA() {
-//        List<DTO_sp> list = new ArrayList<>();
-//        Cursor c = db.rawQuery("SELECT * FROM tb_SanPham INNER JOIN tb_loaihang on tb_SanPham.MaLoai = tb_loaihang.MaLoai", null);
-//        if (c != null && c.getCount() > 0) {
-//            c.moveToFirst();
-//            do {
-//                String MaSP = c.getString(0);
-//                int MaLoai = c.getInt(1);
-//                int MaND = c.getInt(2);
-//                String TenSP = c.getString(3);
-//                byte[] anh = c.getBlob(4);
-//                int trangtha = c.getInt(6);
-//                String tenLoai = c.getString(8);
-//                list.add(new DTO_sp(MaSP, MaLoai, tenLoai, MaND, TenSP, anh, trangtha));
-//            } while (c.moveToNext());
-//        }
-//        return list;
-//    }
 
 }

@@ -1,6 +1,6 @@
 package com.example.du_an_1;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,15 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.du_an_1.Adapter.CategoryAdapter;
 import com.example.du_an_1.Adapter.PopularAdapter;
+import com.example.du_an_1.Adapter.Type_Of_Food_Adapter;
+import com.example.du_an_1.DAO.Type_Of_Food_DAO;
 import com.example.du_an_1.DAO.User_DAO;
+import com.example.du_an_1.DTO.Type_Of_Food;
 import com.example.du_an_1.DTO.User;
-import com.example.du_an_1.Domain.CategoryDomain;
 import com.example.du_an_1.Domain.FoodDomain;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     User_DAO user_dao;
@@ -27,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_name;
     private RecyclerView.Adapter adapter1, adapter2;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
+    List<User> listUser = new ArrayList<>();
+    List<Type_Of_Food> list = new ArrayList<>();
+    Type_Of_Food_DAO type_of_food_dao;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             tv_name.setText("Hi " + username);
         }
+
+        list = new ArrayList<>();
+        type_of_food_dao = new Type_Of_Food_DAO(this);
         recyclerViewCategory();
         recyclerViewPopular();
         bottomNavigation();
@@ -97,16 +106,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategoryList = findViewById(R.id.recycler_categories);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
 
-        ArrayList<CategoryDomain> categoryDomains = new ArrayList<>();
-        categoryDomains.add(new CategoryDomain("Pizza", "cat_1"));
-        categoryDomains.add(new CategoryDomain("Burger", "cat_2"));
-        categoryDomains.add(new CategoryDomain("Hotdog", "cat_3"));
-        categoryDomains.add(new CategoryDomain("Drink", "cat_4"));
-        categoryDomains.add(new CategoryDomain("Donut", "cat_5"));
-
-        adapter1 = new CategoryAdapter(categoryDomains);
+        list = type_of_food_dao.getAllTY(0);
+        adapter1 = new Type_Of_Food_Adapter(this,list);
+//        adapter_2 = new FoodAdapter(this, food);
         recyclerViewCategoryList.setAdapter(adapter1);
-        adapter1.getItemViewType(R.id.categoryPic);
+        context = (MainActivity) this;
+//        adapter_2 = adapter_food;
+        type_of_food_dao = new Type_Of_Food_DAO(this);
+        adapter1.notifyDataSetChanged();
 
     }
     private void recyclerViewPopular(){

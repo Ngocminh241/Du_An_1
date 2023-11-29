@@ -1,9 +1,12 @@
 package com.example.du_an_1.DAO;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.du_an_1.DTO.Type_Of_Food;
 import com.example.du_an_1.Database.DbHelper;
@@ -23,8 +26,43 @@ public class Type_Of_Food_DAO {
         return getData(sql);
     }
 
+    public List<Type_Of_Food> getAllTY(int tinhTrang) {
+        List<Type_Of_Food> list = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM loai_Food where tinhTrang =" + tinhTrang, null);
+        if (c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                int maLoai = c.getInt(0);
+//                int maLoai = c.getInt(1);
+                String tenLoai = c.getString(1);
+//                int giaFood = c.getInt(3);
+                byte[] anh = c.getBlob(2);
+//                String moTa = c.getString(5);
+                int trangthai = c.getInt(3);
+                list.add(new Type_Of_Food(maLoai, tenLoai, anh, trangthai));
+            } while (c.moveToNext());
+        }
+        return list;
+    }
+    int theLoai;
+    public String getTheLoai(String maTV) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT maLoai FROM loai_Food WHERE tenLoai=?", new String[] {String.valueOf(maTV)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    theLoai = Integer.parseInt(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return String.valueOf(theLoai);
+    }
+
     public Type_Of_Food getID(String id) {
-        String sql = "SELECT * FROM LoaiSach WHERE maLoai=?";
+        String sql = "SELECT * FROM loai_Food WHERE maLoai=?";
         List<Type_Of_Food> list = getData(sql, id);
         return list.get(0);
     }
