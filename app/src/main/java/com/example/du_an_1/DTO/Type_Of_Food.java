@@ -19,6 +19,11 @@ public class Type_Of_Food {
         this.hinhAnh = hinhAnh;
         this.trangthai = trangthai;
     }
+    public Type_Of_Food(int maLoai, String tenLoai, byte[] hinhAnh) {
+        this.maLoai = maLoai;
+        this.tenLoai = tenLoai;
+        this.hinhAnh = hinhAnh;
+    }
 
 
     public Type_Of_Food() {
@@ -36,11 +41,11 @@ public class Type_Of_Food {
         this.tenLoai = tenLoai;
     }
 
-    public int getId() {
+    public int getMaLoai() {
         return maLoai;
     }
 
-    public void setId(int id) {
+    public void setMaLoai(int id) {
         this.maLoai = id;
     }
 

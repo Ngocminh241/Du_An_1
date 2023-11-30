@@ -8,17 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,9 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.du_an_1.Adapter.FoodAdapter_ql;
-import com.example.du_an_1.Adapter.LoaiFood_SpinerAdapter;
-import com.example.du_an_1.DAO.Food_DAO;
+import com.example.du_an_1.Adapter.Type_Of_Food_QL_adapter;
 import com.example.du_an_1.DAO.Type_Of_Food_DAO;
 import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.DTO.Type_Of_Food;
@@ -49,7 +43,7 @@ import java.util.List;
  * Use the {@link QuanLySanPham_KD_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuanLySanPham_KD_Fragment extends Fragment {
+public class QuanLyLoaiSanPhamKD extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,30 +54,28 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public QuanLySanPham_KD_Fragment() {
+    public QuanLyLoaiSanPhamKD() {
         // Required empty public constructor
     }
 
     FloatingActionButton fab;
     NavigationQuanLy navigationQuanLy;
-    List<Food> list;
-    Food_DAO dao_food;
+    List<Type_Of_Food> list;
     Dialog dialog;
 
-    Food food;
+    Type_Of_Food type_of_food;
     RecyclerView recyclerView;
-    FoodAdapter_ql adapter_food;
-    Uri selectedImage;
-    LoaiFood_SpinerAdapter spinnerAdapter;
 
-    ArrayList<Type_Of_Food> listLoaiFood;
+    Uri selectedImage;
+
     Type_Of_Food_DAO type_of_food_dao;
+    Type_Of_Food_QL_adapter type_of_food_ql_adapter;
 
     RecyclerView.LayoutManager layoutManager;
     Calendar lich = Calendar.getInstance();
     int maLoai;
-    public static QuanLySanPham_KD_Fragment newInstance(String param1, String param2) {
-        QuanLySanPham_KD_Fragment fragment = new QuanLySanPham_KD_Fragment();
+    public static QuanLyLoaiSanPhamKD newInstance(String param1, String param2) {
+        QuanLyLoaiSanPhamKD fragment = new QuanLyLoaiSanPhamKD();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -93,7 +85,7 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
 
     public void taoDoiTuong() {
         dialog = new Dialog(getContext());
-        dao_food = new Food_DAO(dialog.getContext());
+        type_of_food_dao = new Type_Of_Food_DAO(dialog.getContext());
         list = new ArrayList<>();
     }
 
@@ -111,24 +103,24 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quan_ly_san_pham, container, false);
+        return inflater.inflate(R.layout.fragment_quan_ly_loai_san_pham, container, false);
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         FloatingActionButton floatThem = view.findViewById(R.id.fab);
-        recyclerView = view.findViewById(R.id.rcv_SP);
+        recyclerView = view.findViewById(R.id.rcv_LSP);
         navigationQuanLy = (NavigationQuanLy) getContext();
-        list = dao_food.getAll(0);
-        adapter_food = new FoodAdapter_ql(view.getContext(), list,0);
+        list = type_of_food_dao.getAllTY(0);
+        type_of_food_ql_adapter = new Type_Of_Food_QL_adapter(view.getContext(), list,0);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter_food);
-        adapter_food.notifyDataSetChanged();
+        recyclerView.setAdapter(type_of_food_ql_adapter);
+        type_of_food_ql_adapter.notifyDataSetChanged();
         floatThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Gán ảnh
-                int drawableResourceId = R.drawable.anh_spl;
+                int drawableResourceId = R.drawable.add_food;
                 Uri drawableUri = new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                         .authority(getResources().getResourcePackageName(drawableResourceId))
@@ -142,11 +134,10 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    String id_sp;
-    int maloai, giaSp;
-    String tensp;
+
+    int id_lsp;
+    String tenlsp;
     byte[] anh;
-    String tenLoai, moTa;;
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -157,28 +148,13 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
     }
     private void showDialogAdd(final Context context) {
         dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_them_sp);
+        dialog.setContentView(R.layout.dialog_them_loai_sp);
         //ánh xạ
         EditText ed_idSp = dialog.findViewById(R.id.txtIdSanPhamThem);
-        Spinner sp_loaiSp = dialog.findViewById(R.id.spLoaiThem);
-
         EditText ed_tenSp = dialog.findViewById(R.id.txtTenSanPhamThem);
-        EditText ed_giaSp = dialog.findViewById(R.id.txtGiaSp);
-        EditText ed_mota = dialog.findViewById(R.id.txtMota);
         Button btn_themsp = dialog.findViewById(R.id.btnSaveThem);
         Button btn_themAnh = dialog.findViewById(R.id.btnlayanh);
 
-
-        listLoaiFood = new ArrayList<Type_Of_Food>();
-        type_of_food_dao = new Type_Of_Food_DAO(context);
-        listLoaiFood = (ArrayList<Type_Of_Food>) type_of_food_dao.getAll();
-
-        spinnerAdapter = new LoaiFood_SpinerAdapter(context, listLoaiFood);
-
-        sp_loaiSp.setAdapter(spinnerAdapter);
-
-
-        final Type_Of_Food[] getID = {new Type_Of_Food()};
 //        int ngay = lich.get(Calendar.DAY_OF_MONTH);
 //        int thang = lich.get(Calendar.MONTH);
 //        int nam = lich.get(Calendar.YEAR);
@@ -189,38 +165,18 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
-        sp_loaiSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                maLoai = listLoaiFood.get(position).getMaLoai();
-                if (Integer.parseInt(type_of_food_dao.getTrangThai(maLoai))==0){
-                    maLoai = listLoaiFood.get(position).getMaLoai();
-                    Toast.makeText(dialog.getContext(), "Chọn " + listLoaiFood.get(position).getTenLoai(), Toast.LENGTH_SHORT).show();
-                }
-                else if (Integer.parseInt(type_of_food_dao.getTrangThai(maLoai))==1){
-                    Toast.makeText(dialog.getContext(),listLoaiFood.get(position).getTenLoai()+": Loại sản phẩm này đã ngừng kinh doanh, vui lòng chọn loại khác ", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         btn_themsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!ed_idSp.getText().toString().isEmpty() && !ed_idSp.getText().toString().isEmpty() && !ed_tenSp.getText().toString().isEmpty() && !ed_giaSp.getText().toString().isEmpty() && !ed_mota.getText().toString().isEmpty()&&(Integer.parseInt(type_of_food_dao.getTrangThai(maLoai))!=1)) {
-                    id_sp = ed_idSp.getText().toString();
-                    maloai = sp_loaiSp.getSelectedItemPosition();
-                    tensp = ed_tenSp.getText().toString();
-                    giaSp = Integer.parseInt(ed_giaSp.getText().toString());
-                    moTa = ed_mota.getText().toString();
+                if (!ed_idSp.getText().toString().isEmpty()&&!ed_tenSp.getText().toString().isEmpty()) {
+                    id_lsp = Integer.parseInt(ed_idSp.getText().toString());
+                    tenlsp = ed_tenSp.getText().toString();
                     anh = getAnh(selectedImage);
                     openDialog_tb(dialog);
                 } else {
-                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin và kiểm tra lại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -241,11 +197,11 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (checkten() == 0) {
-                    if (id_sp != "") {
-                if (themSP() > 0) {
-                    dialog.dismiss();
-                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    dialog1.dismiss();
+                    if (id_lsp >= 0) {
+                        if (themSP() > 0) {
+                            dialog.dismiss();
+                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            dialog1.dismiss();
                         } else {
                             Toast.makeText(getContext(), "Mã sản phẩm đã tồn tại vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
                         }
@@ -298,30 +254,27 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
     }
     public void loadData() {
         list.clear();
-        list.addAll(dao_food.getAll(0));
-        adapter_food.notifyDataSetChanged();
+        list.addAll(type_of_food_dao.getAllTY(0));
+        type_of_food_ql_adapter.notifyDataSetChanged();
     }
     public long themSP() {
         long a = 0;
-        food = new Food();
-        food.setMaFood(id_sp);
-        food.setMaLoai(maloai);
-        food.setTenFood(tensp);
-        food.setGiaFood(giaSp);
-        food.setMoTa(moTa);
-        food.setHinhAnh(anh);
+        type_of_food = new Type_Of_Food();
+        type_of_food.setMaLoai(id_lsp);
+        type_of_food.setTenLoai(tenlsp);
+        type_of_food.setHinhAnh(anh);
         int maND = 1;
         checkten();
-        a = dao_food.ADDSanPham(food);
+        a = type_of_food_dao.ADDSanPham(type_of_food);
         list.clear();
-        list.addAll(dao_food.getAll(0));
-        adapter_food.notifyDataSetChanged();
+        list.addAll(type_of_food_dao.getAllTY(0));
+        type_of_food_ql_adapter.notifyDataSetChanged();
         return a;
     }
     private int checkten() {
         int a = 0;
-        for (Food sp : list) {
-            if (tensp.equals(sp.getTenFood())) {
+        for (Type_Of_Food sp : list) {
+            if (tenlsp.equals(sp.getTenLoai())) {
                 return 2;
             }
         }

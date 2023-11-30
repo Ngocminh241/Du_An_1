@@ -25,7 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "sDT TEXT NOT NULL," +
                 "vaiTro INTEGER NOT NULL)";
 
-        String createTableLoaiFood = "CREATE TABLE loai_Food(maLoai INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL," +
+        String createTableLoaiFood = "CREATE TABLE loai_Food(maLoai INTEGER PRIMARY KEY UNIQUE NOT NULL," +
                 "tenLoai TEXT UNIQUE NOT NULL,"+
                 "anh BLOB,"+
                 "tinhTrang INTEGER DEFAULT (0))";
@@ -41,7 +41,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         String addAdmin = "INSERT INTO User(maDN,matKhau,hoTen,sDT,vaiTro) VALUES('admin','admin','Admin','admin',1)";
         String addLoai = "INSERT INTO loai_Food(maLoai, tenLoai, anh,tinhTrang) VALUES(0,'Pizza',null,0),"+"(1,'Burger',null,0),"+"(2,'Hotdog',null,0),"+"(3,'Drink',null,0),"+"(4,'Donut',null,0)";
-        String addPizza = "INSERT INTO FOOD(maFood,maLoai,tenFood,giaFood,hinhAnh,moTa,trangThai) VALUES('F001',1,'Pizza Chese',880,null,'abc',0)";
+        String addPizza = "INSERT INTO FOOD(maFood,maLoai,tenFood,giaFood,hinhAnh,moTa,trangThai) VALUES('F001',0,'Pizza Chese',880,null,'abc',0)";
 
         db.execSQL(createTableUser);
         db.execSQL(createTableLoaiFood);
