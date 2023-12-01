@@ -104,34 +104,45 @@ public class Login extends AppCompatActivity {
         } else {
             if (user_dao.checkLogin(strUser, strPass) > 0) {
                 rememberUser(strUser, strPass, chkRememberPass.isChecked());
-                for (User obj : user_dao.getAll()) {
-                    if (obj.getMaDN().equalsIgnoreCase(strUser) && obj.getMatKhau().equalsIgnoreCase(strPass)) {
-                        if (obj.getMaUser() == 1) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                                    Intent i3 = new Intent(Login.this, NavigationQuanLy.class);
-                                    startActivity(i3);
-                                }
-                            }, 1200);
-                            return;
-                        }
-                        if (obj.getMaUser() != 1) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                                    Intent ic = new Intent(Login.this, MainActivity.class);
-                                    ic.putExtra("user", strUser);
-                                    startActivity(ic);
-                                    finish();
-                                }
-                            }, 1200);
-                            return;
+                    for (User obj : user_dao.getAll()) {
+                        if (obj.getMaDN().equalsIgnoreCase(strUser) && obj.getMatKhau().equalsIgnoreCase(strPass)) {
+                            if ((obj.getVaiTro() == 1)) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                                        Intent i3 = new Intent(Login.this, NavigationQuanLy.class);
+                                        startActivity(i3);
+                                    }
+                                }, 1200);
+                                return;
+                            }
+                            if (obj.getVaiTro() == 0) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                                        Intent ic = new Intent(Login.this, MainActivity.class);
+                                        ic.putExtra("user", strUser);
+                                        startActivity(ic);
+                                        finish();
+                                    }
+                                }, 1200);
+                                return;
+                            }
+                            if (obj.getVaiTro() == 3) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "Tài khoản của bạn đã b dừng hoạt động. Liên hệ Admin để được hỗ trợ!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }, 1200);
+                                return;
+                            }
                         }
                     }
-                }
+
+
             } else {
                 Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();
             }

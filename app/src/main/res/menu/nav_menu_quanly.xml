@@ -16,6 +16,11 @@
             android:id="@+id/QLSP"
             android:icon="@drawable/add_food"
             />
+        <item
+            android:title="Quản Lý Người Dùng"
+            android:id="@+id/QLND"
+            android:icon="@drawable/avatar"
+            />
 
 <!--        <item-->
 <!--            android:title="Quản Lý Xe"-->

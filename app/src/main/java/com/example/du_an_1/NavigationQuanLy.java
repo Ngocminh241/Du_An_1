@@ -26,6 +26,7 @@ import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.User;
 import com.example.du_an_1.Fragment.Frag_lsp_ql;
 import com.example.du_an_1.Fragment.Frag_sp_ql;
+import com.example.du_an_1.Fragment.Fragment_ND_ql;
 import com.example.du_an_1.Fragment.QuanLyHoaDonFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -85,6 +86,10 @@ public class NavigationQuanLy extends AppCompatActivity {
                 }else if (item.getItemId() == R.id.QLSP) {
                     toolbar.setTitle("Quản lý sản phẩm");
                     fragment = new Frag_sp_ql();
+                }
+                else if (item.getItemId() == R.id.QLND) {
+                    toolbar.setTitle("Quản lý người dùng");
+                    fragment = new Fragment_ND_ql();
                 }else if (item.getItemId() == R.id.QLThoat) {
                     openDialog_DangXuat();
                 }

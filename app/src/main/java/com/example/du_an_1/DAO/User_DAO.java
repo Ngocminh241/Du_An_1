@@ -22,6 +22,27 @@ public class User_DAO {
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
+    public int KhoiphucRow(User US) {
+        ContentValues values = new ContentValues();
+        values.put("vaiTro", 0);
+
+        String[] index = new String[]{
+                String.valueOf(US.getMaUser())
+
+        };
+        return db.update("User", values, "maUser=?", index);
+    }
+    public int DeleteRow(User US) {
+        ContentValues values = new ContentValues();
+        values.put("vaiTro", 3);
+
+        String[] index = new String[]{
+                String.valueOf(US.getMaUser())
+
+        };
+        return db.update("User", values, "maUser=?", index);
+    }
+
 
     public long insert(User obj) {
         ContentValues values = new ContentValues();
@@ -69,6 +90,39 @@ public class User_DAO {
         }
         return 1;
     }
+    public List<User> getAllA(int vaiTro) {
+        List<User> list = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM User where vaiTro =" + vaiTro, null);
+        if (c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                int maND = c.getInt(0);
+                String maDN = c.getString(1);
+                String mk = c.getString(2);
+                String ten = c.getString(3);
+                String sdt = c.getString(4);
+                int vai = c.getInt(5);
+                list.add(new User(maND, maDN, mk, ten, sdt, vai));
+            } while (c.moveToNext());
+        }
+        return list;
+    }
+    int vaitro;
+    public String getVaiTro(String vt) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT vaiTro FROM User WHERE maDN="+vt, new String[] {String.valueOf(vt)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    vaitro = Integer.parseInt(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return String.valueOf(vaitro);
+    }
 
 
     @SuppressLint("Range")
@@ -82,7 +136,7 @@ public class User_DAO {
             obj.setMatKhau(cursor.getString(cursor.getColumnIndex("matKhau")));
             obj.setHoTen(cursor.getString(cursor.getColumnIndex("hoTen")));
             obj.setsDT(cursor.getString(cursor.getColumnIndex("sDT")));
-            obj.setMaUser(cursor.getInt(cursor.getColumnIndex("vaiTro")));
+            obj.setVaiTro(cursor.getInt(cursor.getColumnIndex("vaiTro")));
             list.add(obj);
         }
         return list;
