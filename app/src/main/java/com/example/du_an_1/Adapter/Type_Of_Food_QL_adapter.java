@@ -202,6 +202,8 @@ public class Type_Of_Food_QL_adapter extends RecyclerView.Adapter<Type_Of_Food_Q
         Button btn_themAnh = view.findViewById(R.id.btnlayanh);
         Button back = view.findViewById(R.id.btnCancelThem);
 
+        ed_idlSp.setCursorVisible(false);
+
 //        final Type_Of_Food[] getID = {new Type_Of_Food()};
 //        getID[0].setId(list.get(position).getId());
         Calendar lich = Calendar.getInstance();

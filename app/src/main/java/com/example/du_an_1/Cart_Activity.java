@@ -31,6 +31,8 @@ public class Cart_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         managementCart = new ManagementCart(this);
+        Intent i = getIntent();
+
 
         initView();
         initList();
@@ -90,14 +92,14 @@ public class Cart_Activity extends AppCompatActivity {
     private void initList(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerViewList.setLayoutManager(linearLayoutManager);
-        adapter = new Cart_Adapter(managementCart.getListCart(),this, new ChangeNumberItemsListener() {
+        adapter = new Cart_Adapter(managementCart.getListCart_2(),this, new ChangeNumberItemsListener() {
             @Override
             public void changed() {
                 CalculateCart();
             }
         });
         recyclerViewList.setAdapter(adapter);
-        if (managementCart.getListCart().isEmpty()){
+        if (managementCart.getListCart_2().isEmpty()){
             tv_empty.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
         }else {
@@ -109,9 +111,9 @@ public class Cart_Activity extends AppCompatActivity {
         double percenTax = 0.025;
         double deliver = 10;
 
-        tax = Math.ceil((managementCart.gettotalFee()*percenTax)*100)/100;
-        double total = Math.ceil((managementCart.gettotalFee()+tax+deliver)*100)/100;
-        double itemTotal = Math.ceil(managementCart.gettotalFee()*100)/100;
+        tax = Math.ceil((managementCart.gettotalFee_2()*percenTax)*100)/100;
+        double total = Math.ceil((managementCart.gettotalFee_2()+tax+deliver)*100)/100;
+        double itemTotal = Math.ceil(managementCart.gettotalFee_2()*100)/100;
 
         tv_item_total_Fee.setText(itemTotal+" VND");
         tv_tax_Fee.setText(tax+" VND");

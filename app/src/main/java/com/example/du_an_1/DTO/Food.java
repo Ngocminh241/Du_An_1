@@ -1,6 +1,8 @@
 package com.example.du_an_1.DTO;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 
 import java.io.File;
@@ -125,6 +127,10 @@ public class Food implements Serializable {
         } catch (Exception e) {
             return null;
         }
+    }
+    public static Bitmap convertByteArrayToBitmap(byte[] image){
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+
     }
 
 

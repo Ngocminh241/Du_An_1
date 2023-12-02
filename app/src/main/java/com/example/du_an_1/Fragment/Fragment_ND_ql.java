@@ -40,7 +40,7 @@ public class Fragment_ND_ql extends Fragment {
                 if (position == 0) {
                     tab.setText("Đang Hoạt Động");
                 } else {
-                    tab.setText("Ngừng Ngừng Hoạt Động");
+                    tab.setText("Ngừng Hoạt Động");
                 }
             }
         });

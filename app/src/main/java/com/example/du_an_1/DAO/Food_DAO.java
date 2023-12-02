@@ -12,8 +12,6 @@ import android.util.Log;
 import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.Database.DbHelper;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -241,24 +239,21 @@ public class Food_DAO {
         }
         return hinh;
     }
+    Uri hinh2;
 
-    public Uri hienthi(Context context) {
-        byte[] imageData = food.getHinhAnh();// Mảng byte chứa dữ liệu hình ảnh
-        String tempFileName = "temp_image.jpg";
-        Uri uri;
-        // Tạo đường dẫn tới tập tin ảnh tạm
-        File tempFile = new File(context.getCacheDir(), tempFileName);
-        // Ghi dữ liệu blob vào tập tin ảnh tạm
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
-            fileOutputStream.write(imageData);
-            fileOutputStream.close();
-            uri = Uri.fromFile(tempFile);
-            return uri;
+    public byte[] getAnh2(String maFood) {
+        byte[] hinh2 = null;
+        try (Cursor cursor = db.rawQuery("SELECT hinhAnh FROM FOOD WHERE maFood=?", new String[]{maFood})) {
+            if (cursor != null && cursor.moveToFirst()) {
+                hinh2 = cursor.getBlob(0);
+            }
         } catch (Exception e) {
-            return null;
+            Log.e(TAG, "Lỗi: " + e.getMessage());
         }
+        return hinh2;
     }
+
+
 
 
 }

@@ -18,10 +18,14 @@ import com.example.du_an_1.Adapter.Type_Of_Food_ListCategory_Adapter;
 import com.example.du_an_1.Cart_Activity;
 import com.example.du_an_1.DAO.Food_DAO;
 import com.example.du_an_1.DAO.Type_Of_Food_DAO;
+import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.DTO.Type_Of_Food;
 import com.example.du_an_1.MainActivity;
+import com.example.du_an_1.Profile;
 import com.example.du_an_1.R;
+import com.example.du_an_1.SettingActivity;
+import com.example.du_an_1.Support;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ public class Pizza_List extends AppCompatActivity {
 
     FloatingActionButton floatingCart;
     Food food;
-
+    User_DAO user_dao;
      Food_DAO food_dao;
      Type_Of_Food_DAO type_of_food_dao;
     FoodAdapter adapter_food;
@@ -68,6 +72,12 @@ public class Pizza_List extends AppCompatActivity {
         theLoai_2 = Integer.parseInt(food_dao.getLoai(theLoai_1));
         tt = Integer.parseInt(food_dao.getTT(theLoai_1));
 
+
+        Intent g = getIntent();
+        String user = g.getStringExtra("user");
+        user_dao = new User_DAO(this);
+        String username = user_dao.getTenTV(user);
+
         recyclerViewPizza();
         recyclerViewCategory();
         bottomNavigation();
@@ -76,6 +86,15 @@ public class Pizza_List extends AppCompatActivity {
     private void bottomNavigation(){
         floatingCart = findViewById(R.id.float_cart_btn);
         LinearLayout homeBtn = findViewById(R.id.home_btn);
+        LinearLayout settingBtn = findViewById(R.id.setting_btn);
+        LinearLayout profile = findViewById(R.id.profile_btn);
+        LinearLayout support = findViewById(R.id.support_btn);
+
+        Intent i = getIntent();
+        String user = i.getStringExtra("user");
+        user_dao = new User_DAO(this);
+        String username = user_dao.getTenTV(user);
+
 
         floatingCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +105,33 @@ public class Pizza_List extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Pizza_List.this, MainActivity.class));
+                Intent ic = new Intent(Pizza_List.this, MainActivity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
+            }
+        });
+        support.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ic = new Intent(Pizza_List.this, Support.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
+            }
+        });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ic = new Intent(Pizza_List.this, Profile.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
+            }
+        });
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ic = new Intent(Pizza_List.this, SettingActivity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
     }

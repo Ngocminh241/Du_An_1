@@ -4,79 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cart_background"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/cart_background"
-        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_tilte_sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/title_background"
+            android:background="#ff5e00"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Thêm Khách Hàng"
+            android:text="Đăng nhập để tiếp tục"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txt_ten_ND"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/search_background"
-            android:hint="Tên Khách Hàng"
-            android:paddingHorizontal="15dp" />
-
-        <EditText
-            android:id="@+id/txt_SDT"
+            android:id="@+id/txtId_pr"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="5dp"
             android:background="@drawable/search_background"
-            android:hint="Số Điện Thoại"
-            android:inputType="number"
+            android:hint="Mã đăng nhập"
             android:paddingHorizontal="15dp" />
+
         <EditText
-            android:id="@+id/txt_MaDN"
+            android:id="@+id/txtPw_pr"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:background="@drawable/search_background"
-            android:hint="Mã Đăng Nhập"
+            android:hint="Mật khẩu"
             android:paddingHorizontal="15dp" />
-        <EditText
-            android:id="@+id/txt_pass"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/search_background"
-            android:hint="Mật khẩu "
-            android:paddingHorizontal="15dp" />
-        <EditText
-            android:id="@+id/txt_cf_pass"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/search_background"
-            android:hint="Xác nhận lại mật khẩu"
-            android:paddingHorizontal="15dp" />
+        <!--        <EditText-->
+        <!--            android:id="@+id/txtGiaSp"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:layout_marginHorizontal="30dp"-->
+        <!--            android:layout_marginVertical="5dp"-->
+        <!--            android:background="@drawable/search_background"-->
+        <!--            android:hint="Giá sản phẩm"-->
+        <!--            android:paddingHorizontal="15dp" />-->
+        <!--        <EditText-->
+        <!--            android:id="@+id/txtMota"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_marginHorizontal="30dp"-->
+        <!--            android:layout_marginVertical="5dp"-->
+        <!--            android:background="@drawable/search_background"-->
+        <!--            android:hint="Mô tả"-->
+        <!--            android:paddingHorizontal="15dp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="25dp"
+            android:layout_marginVertical="20dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -98,11 +84,12 @@
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/background_button_login"
-                android:text="Save"
+                android:text="Login"
                 android:textSize="18sp"
                 app:backgroundTint="@null"
                 android:textStyle="bold"
                 android:textColor="@color/white" />
         </LinearLayout>
-    </LinearLayout>
+
+
 </LinearLayout>

@@ -128,7 +128,7 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Gán ảnh
-                int drawableResourceId = R.drawable.anh_spl;
+                int drawableResourceId = R.drawable.anh_food_md;
                 Uri drawableUri = new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                         .authority(getResources().getResourcePackageName(drawableResourceId))

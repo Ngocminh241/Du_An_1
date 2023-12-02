@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     User_DAO user_dao;
     User user;
     TextView tv_name;
+    Login login;
     private RecyclerView.Adapter adapter1, adapter2, adapter3;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList, recyclerViewListFood;
     List<User> listUser = new ArrayList<>();
@@ -129,13 +130,17 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Cart_Activity.class));
+                Intent ic = new Intent(MainActivity.this, Cart_Activity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Support.class));
+                    Intent ic = new Intent(MainActivity.this, Support.class);
+                    ic.putExtra("user", user);
+                    startActivity(ic);
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
@@ -153,13 +158,17 @@ public class MainActivity extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                Intent ic = new Intent(MainActivity.this, MainActivity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                Intent ic = new Intent(MainActivity.this, SettingActivity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
     }

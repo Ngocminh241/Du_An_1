@@ -1,22 +1,27 @@
 package com.example.du_an_1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.du_an_1.DAO.User_DAO;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ChinhSachBaoMat extends AppCompatActivity {
-
+    User_DAO user_dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinh_sach_bao_mat);
 
 
+        Intent i = getIntent();
+        String user = i.getStringExtra("user");
+        user_dao = new User_DAO(this);
+        String username = user_dao.getTenTV(user);
 
         bottomNavigation();
     }
@@ -27,37 +32,51 @@ public class ChinhSachBaoMat extends AppCompatActivity {
         LinearLayout profile = findViewById(R.id.profile_btn);
         LinearLayout support = findViewById(R.id.support_btn);
 
+        Intent i = getIntent();
+        String user = i.getStringExtra("user");
+        user_dao = new User_DAO(this);
+        String username = user_dao.getTenTV(user);
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChinhSachBaoMat.this, Cart_Activity.class));
+                Intent ic = new Intent(ChinhSachBaoMat.this, Cart_Activity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChinhSachBaoMat.this, Support.class));
+                Intent ic = new Intent(ChinhSachBaoMat.this, Support.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChinhSachBaoMat.this, Profile.class));
-
+                Intent ic = new Intent(ChinhSachBaoMat.this, Profile.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChinhSachBaoMat.this, MainActivity.class));
+                Intent ic = new Intent(ChinhSachBaoMat.this, MainActivity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChinhSachBaoMat.this, SettingActivity.class));
+                Intent ic = new Intent(ChinhSachBaoMat.this, SettingActivity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
     }

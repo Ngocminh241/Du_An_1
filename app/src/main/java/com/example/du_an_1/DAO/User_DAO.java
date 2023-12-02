@@ -56,8 +56,15 @@ public class User_DAO {
 
     public long updatePass(User obj) {
         ContentValues values = new ContentValues();
+        values.put("matKhau", obj.getMatKhau());
+        return db.update("User", values, "maDN = ?", new String[]{String.valueOf(obj.getMaDN())});
+    }
+    public long Update(User obj) {
+        ContentValues values = new ContentValues();
         values.put("maDN", obj.getMaDN());
         values.put("matKhau", obj.getMatKhau());
+        values.put("hoTen", obj.getHoTen());
+        values.put("sDT", obj.getsDT());
         return db.update("User", values, "maDN = ?", new String[]{String.valueOf(obj.getMaDN())});
     }
 
@@ -124,6 +131,22 @@ public class User_DAO {
         return String.valueOf(vaitro);
     }
 
+    int madn;
+    public String getMaND(String vt) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT maUser FROM User WHERE maDN="+vt, new String[] {String.valueOf(vt)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    madn = Integer.parseInt(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return String.valueOf(madn);
+    }
 
     @SuppressLint("Range")
     private List<User> getData(String sql, String... selectionArgs) {
@@ -159,6 +182,54 @@ public class User_DAO {
             Log.i(TAG, "Lỗi" + e);
         }
         return tenTV;
+    }
+    String sdtTV;
+    public String getsdtTV(String maTV) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT sDT FROM User WHERE maDN=?", new String[] {String.valueOf(maTV)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    sdtTV = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return sdtTV;
+    }
+    String mkTV;
+    public String getmkTV(String maTV) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT matKhau FROM User WHERE maDN=?", new String[] {String.valueOf(maTV)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    mkTV = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return mkTV;
+    }
+    String maDNTV;
+    public String getMDNTV(String maTV) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT maDN FROM User WHERE hoTen=?", new String[] {String.valueOf(maTV)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    maDNTV = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return maDNTV;
     }
 
 
