@@ -268,6 +268,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="4dp"
                         app:srcCompat="@drawable/home1" />
 
                     <TextView
@@ -293,6 +294,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="4dp"
                         app:srcCompat="@drawable/user1" />
 
                     <TextView
@@ -342,6 +344,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="4dp"
                         app:srcCompat="@drawable/chat1" />
 
                     <TextView
@@ -366,6 +369,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="4dp"
                         app:srcCompat="@drawable/settings1" />
 
                     <TextView
