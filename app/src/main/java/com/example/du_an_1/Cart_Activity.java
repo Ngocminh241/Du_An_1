@@ -1,124 +1,162 @@
 package com.example.du_an_1;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
 
-import com.example.du_an_1.Adapter.Cart_Adapter;
-import com.example.du_an_1.Helper.ManagementCart;
-import com.example.du_an_1.Interface.ChangeNumberItemsListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.du_an_1.DAO.DAO_GioHang;
+import com.example.du_an_1.DAO.DAO_chitietDonHang;
+import com.example.du_an_1.DAO.Food_DAO;
+import com.example.du_an_1.DAO.User_DAO;
+import com.example.du_an_1.DTO.Food;
+import com.example.du_an_1.DTO.GioHang;
+import com.example.du_an_1.DTO.chitietDonHang;
+import com.example.du_an_1.Domain.CartCard;
+import com.example.du_an_1.Domain.OrderCard;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Cart_Activity extends AppCompatActivity {
-    private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerViewList;
-    private ManagementCart managementCart;
-
-    TextView tv_item_total_Fee, tv_delivery_Services_Fee, tv_tax_Fee, tv_total_Fee, tv_empty;
-    private double tax;
-    private ScrollView scrollView;
+    public static LinearLayout cartContainer;
+    private static String status;
+    private LinearLayout btnDangDen, btnLichSu, btnGioHang;
+    private TextView tvGioHang, tvDangDen, tvLichSu;
+    User_DAO user_dao ;
+    DAO_GioHang dao_gioHang;
+    DAO_chitietDonHang dao_chitietDonHang;
+    Food_DAO food_dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        managementCart = new ManagementCart(this);
+        cartContainer = findViewById(R.id.cartContainer);
+
+        referencesComponent();
+        LoadOrder("craft");
+        status = "craft";
+    }
+
+    private void referencesComponent(){
+        btnGioHang = findViewById(R.id.btnGioHang);
+        btnGioHang.setOnClickListener(view ->{
+            resetAttribute();
+            btnGioHang.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.main_color));
+            tvGioHang.setTextColor(Color.WHITE);
+
+            LoadOrder("craft");
+        });
+
+        btnDangDen = findViewById(R.id.btnDangDen);
+        btnDangDen.setOnClickListener(view->{
+            resetAttribute();
+            btnDangDen.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.main_color));
+            tvDangDen.setTextColor(Color.WHITE);
+
+            LoadOrder("coming");
+        });
+
+        btnLichSu = findViewById(R.id.btnLichSu);
+        btnLichSu.setOnClickListener(view -> {
+            resetAttribute();
+            btnLichSu.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.main_color));
+            tvLichSu.setTextColor(Color.WHITE);
+
+            LoadOrder("history");
+        });
+
+        tvGioHang = findViewById(R.id.tvGioHang);
+        tvDangDen = findViewById(R.id.tvDangDen);
+        tvLichSu = findViewById(R.id.tvLichSu);
+
+        Button btnThanhToan = findViewById(R.id.btnThanhToan);
+        btnThanhToan.setOnClickListener(view ->{
+            if(!status.equals("craft"))
+                return;
+
+            Cursor cursor = dao_gioHang.getCart(MainActivity.user.getMaUser());
+            if(!cursor.moveToFirst())
+                return;
+
+            PaymentActivity.user = MainActivity.user;
+            Intent intent = new Intent(this, PaymentActivity.class);
+            intent.putExtra("orderId", cursor.getInt(0));
+            startActivity(intent);
+        });
+    }
+
+    private void LoadOrder(String type){
+        user_dao = new User_DAO(this);
         Intent i = getIntent();
-
-
-        initView();
-        initList();
-        CalculateCart();
-        bottomNavigation();
-    }
-
-    private void bottomNavigation(){
-        FloatingActionButton floatingActionButton = findViewById(R.id.float_cart_btn);
-        LinearLayout homeBtn = findViewById(R.id.home_btn);
-        LinearLayout settingBtn = findViewById(R.id.setting_btn);
-        LinearLayout profile = findViewById(R.id.profile_btn);
-        LinearLayout support = findViewById(R.id.support_btn);
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Cart_Activity.this, Cart_Activity.class));
+        String user_1 = i.getStringExtra("user");
+        int mangdung = Integer.valueOf(user_dao.getMaND(user_1));
+        status = type;
+        cartContainer.removeAllViews();
+        switch (type) {
+            case "craft":
+                dao_gioHang = new DAO_GioHang(this);
+                Cursor cursor = dao_gioHang.getCart(mangdung);
+                if (!cursor.moveToFirst())
+                    return;
+                cursor.moveToFirst();
+                ArrayList<chitietDonHang> orderDetailArrayList = dao_chitietDonHang.getCartDetailList(cursor.getInt(0));
+                if (orderDetailArrayList.size() > 0) {
+                    Food food;
+                    for (chitietDonHang orderDetail : orderDetailArrayList) {
+                        food = food_dao.getFoodById(orderDetail.getFoodId());
+                        CartCard card = new CartCard(this, food, orderDetail);
+                        cartContainer.addView(card);
+                    }
+                }
+                break;
+            case "coming": {
+                ArrayList<GioHang> orderArrayList = dao_gioHang.getOrderOfUser(Integer.valueOf(user_dao.getMaND(user_1)), "Coming");
+                if (orderArrayList.size() > 0) {
+                    for (GioHang order : orderArrayList) {
+                        OrderCard card = new OrderCard(this, order);
+                        card.setOnClickListener(view -> {
+                            Intent intent = new Intent(this, ViewOrderActivity.class);
+                            intent.putExtra("order", order);
+                            startActivity(intent);
+                        });
+                        cartContainer.addView(card);
+                    }
+                }
+                break;
             }
-        });
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Cart_Activity.this, MainActivity.class));
+            case "history": {
+                ArrayList<GioHang> orderArrayList = dao_gioHang.getOrderOfUser(Integer.valueOf(user_dao.getMaND(user_1)), "Delivered");
+                if (orderArrayList.size() > 0) {
+                    for (GioHang order : orderArrayList) {
+                        OrderCard card = new OrderCard(this, order);
+                        card.setOnClickListener(view -> {
+                            Intent intent = new Intent(this, ViewOrderActivity.class);
+                            intent.putExtra("order", order);
+                            startActivity(intent);
+                        });
+                        cartContainer.addView(card);
+                    }
+                }
+                break;
             }
-        });
-        support.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Cart_Activity.this, Support.class));
-            }
-        });
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Cart_Activity.this, Profile.class));
-
-            }
-        });
-        settingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Cart_Activity.this, SettingActivity.class));
-            }
-        });
-    }
-    private void initView() {
-        recyclerViewList = findViewById(R.id.recyclerView);
-        tv_item_total_Fee = findViewById(R.id.tv_item_total_Fee);
-        tv_delivery_Services_Fee = findViewById(R.id.tv_delivery_Services_Fee);
-        tv_tax_Fee = findViewById(R.id.tv_tax_Fee);
-        tv_total_Fee = findViewById(R.id.tv_total_Fee);
-        tv_empty = findViewById(R.id.tv_empty);
-        scrollView = findViewById(R.id.scrollView_cart);
-    }
-
-    private void initList(){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
-        recyclerViewList.setLayoutManager(linearLayoutManager);
-        adapter = new Cart_Adapter(managementCart.getListCart_2(),this, new ChangeNumberItemsListener() {
-            @Override
-            public void changed() {
-                CalculateCart();
-            }
-        });
-        recyclerViewList.setAdapter(adapter);
-        if (managementCart.getListCart_2().isEmpty()){
-            tv_empty.setVisibility(View.VISIBLE);
-            scrollView.setVisibility(View.GONE);
-        }else {
-            tv_empty.setVisibility(View.GONE);
-            scrollView.setVisibility(View.VISIBLE);
         }
     }
-    private void CalculateCart(){
-        double percenTax = 0.025;
-        double deliver = 10;
+    private void resetAttribute(){
+        btnGioHang.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.drawable.bg_white));
+        btnDangDen.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_white));
+        btnLichSu.setBackground(ContextCompat.getDrawable(this,R.drawable.bg_white));
 
-        tax = Math.ceil((managementCart.gettotalFee_2()*percenTax)*100)/100;
-        double total = Math.ceil((managementCart.gettotalFee_2()+tax+deliver)*100)/100;
-        double itemTotal = Math.ceil(managementCart.gettotalFee_2()*100)/100;
-
-        tv_item_total_Fee.setText(itemTotal+" VND");
-        tv_tax_Fee.setText(tax+" VND");
-        tv_delivery_Services_Fee.setText(deliver+" VND");
-        tv_total_Fee.setText(total+" VND");
-
+        tvGioHang.setTextColor(Color.BLACK);
+        tvLichSu.setTextColor(Color.BLACK);
+        tvDangDen.setTextColor(Color.BLACK);
     }
 }

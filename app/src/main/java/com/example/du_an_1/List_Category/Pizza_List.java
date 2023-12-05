@@ -99,7 +99,9 @@ public class Pizza_List extends AppCompatActivity {
         floatingCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Pizza_List.this, Cart_Activity.class));
+                Intent ic = new Intent(Pizza_List.this, Cart_Activity.class);
+                ic.putExtra("user", user);
+                startActivity(ic);
             }
         });
         homeBtn.setOnClickListener(new View.OnClickListener() {

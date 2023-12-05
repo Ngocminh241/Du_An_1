@@ -14,7 +14,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.du_an_1.DAO.Food_DAO;
+import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.Food;
+import com.example.du_an_1.DTO.User;
 import com.example.du_an_1.MainActivity;
 import com.example.du_an_1.R;
 import com.example.du_an_1.ShowDetailActivity_2;
@@ -27,7 +29,8 @@ public class FoodAdapter_Home extends RecyclerView.Adapter<FoodAdapter_Home.View
     List<Food> list;
     MainActivity mainActivity;
     Food_DAO food_dao;
-    ArrayList<Food> list2;
+    ArrayList<User> list2;
+    User_DAO user_dao ;
     private FoodAdapter_Home.ViewHolder currentViewHolder;
 
 
@@ -52,6 +55,8 @@ public class FoodAdapter_Home extends RecyclerView.Adapter<FoodAdapter_Home.View
     @Override
     public void onBindViewHolder(@NonNull FoodAdapter_Home.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
+        user_dao = new User_DAO(context);
+
         holder.tv_title.setText(list.get(position).getTenFood());
         holder.tv_fee.setText(String.valueOf(list.get(position).getGiaFood()));
         holder.img_pic.setImageURI(list.get(position).hienthi(context));
@@ -66,6 +71,7 @@ public class FoodAdapter_Home extends RecyclerView.Adapter<FoodAdapter_Home.View
                 Intent intent = new Intent(holder.itemView.getContext(), ShowDetailActivity_2.class);
                 intent.putExtra("object_2", list.get(position).getMaFood());
                 intent.putExtra("image_data", list.get(position).getHinhAnh());
+                intent.putExtra("user", String.valueOf(MainActivity.user));
                 holder.itemView.getContext().startActivity(intent);
             }
         });
@@ -94,6 +100,9 @@ public class FoodAdapter_Home extends RecyclerView.Adapter<FoodAdapter_Home.View
 
         public byte[] getCurrentImage() {
             return currentImage;
+        }
+        public Intent getIntent() {
+            return null;
         }
     }
 }

@@ -1,60 +1,70 @@
 package com.example.du_an_1.DTO;
 
-public class GioHang {
-    private int id_DonHang;
-    private String ngayDat;
-    private int trangThai_TT;
-    private int tong_gia;
-    private int maUser;
+import java.io.Serializable;
 
-    public GioHang() {
+public class GioHang implements Serializable {
+    private Integer id;
+    private Integer userId;
+    private String address;
+    private String dateOfOrder;
+    private Double totalValue;
+    private String status;
+
+
+    public GioHang(Integer id, Integer userId, String address, String dateOfOrder, Double totalValue, String status) {
+        this.id = id;
+        this.userId = userId;
+        this.address = address;
+        this.dateOfOrder = dateOfOrder;
+        this.totalValue = totalValue;
+        this.status = status;
     }
 
-    public GioHang(int id_DonHang, String ngayDat, int trangThai_TT, int tong_gia, int maUser) {
-        this.id_DonHang = id_DonHang;
-        this.ngayDat = ngayDat;
-        this.trangThai_TT = trangThai_TT;
-        this.tong_gia = tong_gia;
-        this.maUser = maUser;
+    public Integer getId() {
+        return id;
     }
 
-    public int getId_DonHang() {
-        return id_DonHang;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setId_DonHang(int id_DonHang) {
-        this.id_DonHang = id_DonHang;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public String getNgayDat() {
-        return ngayDat;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public void setNgayDat(String ngayDat) {
-        this.ngayDat = ngayDat;
+    public String getAddress() {
+        return address;
     }
 
-    public int getTrangThai_TT() {
-        return trangThai_TT;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setTrangThai_TT(int trangThai_TT) {
-        this.trangThai_TT = trangThai_TT;
+    public String getDateOfOrder() {
+        return dateOfOrder;
     }
 
-    public int getTong_gia() {
-        return tong_gia;
+    public void setDateOfOrder(String dateOfOrder) {
+        this.dateOfOrder = dateOfOrder;
     }
 
-    public void setTong_gia(int tong_gia) {
-        this.tong_gia = tong_gia;
+    public Double getTotalValue() {
+        return totalValue;
     }
 
-    public int getMaUser() {
-        return maUser;
+    public void setTotalValue(Double totalValue) {
+        this.totalValue = totalValue;
     }
 
-    public void setMaUser(int maUser) {
-        this.maUser = maUser;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

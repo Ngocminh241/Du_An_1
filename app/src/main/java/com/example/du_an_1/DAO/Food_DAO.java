@@ -223,6 +223,11 @@ public class Food_DAO {
         return String.valueOf(TT);
     }
 
+    public Food getFoodById(String id){
+        String query = "SELECT * FROM FOOD WHERE maFood=" + id;
+        Cursor cursor = dbHelper.getDataRow(query);
+        return new Food(cursor.getString(0), cursor.getInt(1), cursor.getString(2), cursor.getInt(3), cursor.getBlob(4), cursor.getString(5), cursor.getInt(6));
+    }
     byte[] hinh;
     public byte[] getAnh(String HA) {
         try {

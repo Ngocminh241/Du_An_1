@@ -1,6 +1,7 @@
 package com.example.du_an_1.Database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
@@ -10,10 +11,24 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "FOODFPOLY";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 3;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+    }
+    public Cursor getDataRow(String sql) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(sql, null);
+        c.moveToFirst();
+        return c;
+    }
+    public void queryData(String sql) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(sql);
+    }
+    public Cursor getData(String sql) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery(sql, null);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -38,24 +53,20 @@ public class DbHelper extends SQLiteOpenHelper {
                 "moTa TEXT NOT NULL," +
                 "trangThai INTEGER DEFAULT (0))";
 
-        String createTableDonHang = "create table DON_HANG(" +
+        String createTableDonHang = "create table gioHang(" +
                         "ID_DON_HANG INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "NGAY_DAT TEXT NOT NULL," +
-                        "TRANG_THAI_THANH_TOAN INTEGER NOT NULL," +
+                        "TRANG_THAI_THANH_TOAN TEXT NOT NULL," +
                         "TONG_GIA INTEGER NOT NULL," +
-                        "maUser INTEGER NOT NULL," +
-                        "FOREIGN KEY (maUser) REFERENCES User(maUser))";
+                        "status TEXT,"+
+                        "maUser INTEGER REFERENCES User(maUser))";
+
         String createTableChiTietDonHang =
                 "CREATE TABLE CHI_TIET_DON_HANG(" +
-                        "ID_CHI_TIET_DON_HANG INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "ID_DON_HANG INTEGER NOT NULL," +
-                        "maFood INTEGER NOT NULL," +
+                        "id_ctdh INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "maFood INTEGER REFERENCES FOOD(maFood)," +
                         "SO_LUONG INTEGER NOT NULL," +
-                        "GIA INTEGER NOT NULL," +
-                        "FOREIGN KEY (ID_DON_HANG) REFERENCES DON_HANG(ID_DON_HANG)," +
-                        "FOREIGN KEY (maFood) REFERENCES FOOD(maFood)" +
-                        ")";
-
+                        "GIA INTEGER NOT NULL)";
 
         String addAdmin = "INSERT INTO User(maDN,matKhau,hoTen,sDT,vaiTro) VALUES('admin','admin','Admin','admin',1)";
         String addLoai = "INSERT INTO loai_Food(maLoai, tenLoai, anh,tinhTrang) VALUES(0,'Pizza',null,0),"+"(1,'Burger',null,0),"+"(2,'Hotdog',null,0),"+"(3,'Drink',null,0),"+"(4,'Donut',null,0)";

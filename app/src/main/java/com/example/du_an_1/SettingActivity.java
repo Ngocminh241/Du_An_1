@@ -79,14 +79,6 @@ public class SettingActivity extends AppCompatActivity {
         String username = user_dao.getTenTV(user);
 
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ic = new Intent(SettingActivity.this, Cart_Activity.class);
-                ic.putExtra("user", user);
-                startActivity(ic);
-            }
-        });
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

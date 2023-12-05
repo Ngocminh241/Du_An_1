@@ -1,6 +1,5 @@
 package com.example.du_an_1.DAO;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +8,6 @@ import com.example.du_an_1.DTO.chitietDonHang;
 import com.example.du_an_1.Database.DbHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DAO_chitietDonHang {
     DbHelper dbHelper;
@@ -20,30 +18,61 @@ public class DAO_chitietDonHang {
         db = dbHelper.getWritableDatabase();
     }
 
-    public long ADDSanPham(chitietDonHang SP) {
-        ContentValues values = new ContentValues();
-//        values.put("ID_CHI_TIET_DON_HANG", SP.getId_CTDonHang());
-        values.put("ID_DON_HANG", SP.getId_DonHang());
-        values.put("maFood", SP.getMaFood());
-        values.put("SO_LUONG", SP.getSoLuong());
-        values.put("GIA", SP.getGia());
-        return db.insert("FOOD", null, values);
-    }
-    public List<chitietDonHang> getAll() {
-        List<chitietDonHang> list = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT * FROM CHI_TIET_DON_HANG JOIN FOOD on CHI_TIET_DON_HANG.maFood = FOOD.maFood " +
-                "JOIN DON_HANG on CHI_TIET_DON_HANG.ID_DON_HANG = DON_HANG.ID_DON_HANG", null);
-        if (c != null && c.getCount() > 0) {
-            c.moveToFirst();
-            do {
-                int id_ctdh = c.getInt(0);
-                int id_dh = c.getInt(1);
-                String id_food = c.getString(2);
-                int so_luong = c.getInt(3);
-                int gia = c.getInt(4);
-                list.add(new chitietDonHang(id_ctdh, id_dh, id_food, so_luong, gia));
-            } while (c.moveToNext());
+    public chitietDonHang getExistOrderDetail(Integer orderId){
+        String query = "SELECT * FROM CHI_TIET_DON_HANG WHERE id_ctdh=" + orderId;
+        Cursor cursor = dbHelper.getDataRow(query);
+        if(cursor.moveToFirst()) {
+            chitietDonHang orderDetail = new chitietDonHang(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3));
+            System.out.println(orderDetail);
+            return orderDetail;
         }
-        return list;
+        return null;
+    }
+    public boolean updateQuantity(chitietDonHang orderDetail){
+        String query = "UPDATE CHI_TIET_DON_HANG SET SO_LUONG=" + orderDetail.getQuantity() +
+                " WHERE id_ctdh=" + orderDetail.getOrderId() +
+                " AND maFood=" + orderDetail.getFoodId();
+        try {
+            dbHelper.queryData(query);
+            return true;
+        } catch (Exception err){
+            return false;
+        }
+    }
+    public boolean addOrderDetail(chitietDonHang od) {
+        String query = "INSERT INTO CHI_TIET_DON_HANG VALUES(" +
+                od.getOrderId() + ", " +
+                od.getFoodId() + ", " +
+                od.getPrice() + ", " +
+                od.getQuantity() + ")";
+        try {
+            dbHelper.queryData(query);
+            return true;
+        } catch (Exception err){
+            return false;
+        }
+    }
+    public ArrayList<chitietDonHang> getCartDetailList(Integer orderId){
+        ArrayList<chitietDonHang> orderDetailArrayList = new ArrayList<>();
+        String query = "SELECT * FROM CHI_TIET_DON_HANG WHERE id_ctdh=" + orderId;
+        Cursor cursor = dbHelper.getData(query);
+        while(cursor.moveToNext()){
+            orderDetailArrayList.add(new chitietDonHang(cursor.getInt(0), cursor.getString(1),
+                    cursor.getInt(2), cursor.getInt(3)));
+        }
+        return orderDetailArrayList;
+    }
+    public boolean deleteOrderDetailByOrderIdAndFoodId(Integer orderId, Integer foodId) {
+        String query = "DELETE FROM CHI_TIET_DON_HANG WHERE maFood=" +
+                foodId + " and id_ctdh=" + orderId;
+        try {
+            dbHelper.queryData(query);
+            return true;
+        } catch (Exception err){
+            return false;
+        }
     }
 }

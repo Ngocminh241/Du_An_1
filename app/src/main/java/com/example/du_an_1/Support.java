@@ -82,14 +82,7 @@ public class Support extends AppCompatActivity {
         user_dao = new User_DAO(this);
         String username = user_dao.getTenTV(user);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ic = new Intent(Support.this, Cart_Activity.class);
-                ic.putExtra("user", user);
-                startActivity(ic);
-            }
-        });
+
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,60 +1,54 @@
 package com.example.du_an_1.DTO;
 
 public class chitietDonHang {
-    private int id_CTDonHang;
-    private int id_DonHang;
-    private String maFood;
-    private int soLuong;
-    private int gia;
+    private Integer orderId;
+    private String foodId;
+    private int price;
+    private Integer quantity;
 
-    public chitietDonHang() {
+    public chitietDonHang(Integer orderId, String foodId, int price) {
+        this.orderId = orderId;
+        this.foodId = foodId;
+        this.price = price;
+        this.quantity = 1;
     }
 
-    public chitietDonHang(int id_CTDonHang, int id_DonHang, String maFood, int soLuong, int gia) {
-        this.id_CTDonHang = id_CTDonHang;
-        this.id_DonHang = id_DonHang;
-        this.maFood = maFood;
-        this.soLuong = soLuong;
-        this.gia = gia;
+    public chitietDonHang(Integer orderId, String foodId, int price, Integer quantity) {
+        this.orderId = orderId;
+        this.foodId = foodId;
+        this.price = price;
+        this.quantity = quantity;
     }
 
-    public int getId_CTDonHang() {
-        return id_CTDonHang;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setId_CTDonHang(int id_CTDonHang) {
-        this.id_CTDonHang = id_CTDonHang;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
-    public int getId_DonHang() {
-        return id_DonHang;
+    public String getFoodId() {
+        return foodId;
     }
 
-    public void setId_DonHang(int id_DonHang) {
-        this.id_DonHang = id_DonHang;
+    public void setFoodId(String foodId) {
+        this.foodId = foodId;
     }
 
-    public String getMaFood() {
-        return maFood;
+    public int getPrice() {
+        return price;
     }
 
-    public void setMaFood(String maFood) {
-        this.maFood = maFood;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public int getGia() {
-        return gia;
-    }
-
-    public void setGia(int gia) {
-        this.gia = gia;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
