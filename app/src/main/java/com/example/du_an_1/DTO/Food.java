@@ -33,16 +33,11 @@ public class Food implements Serializable {
         this.moTa = moTa;
         this.trangthai = trangthai;
     }
-
-
-    public Food(String maFood, int maLoai, String tenFood, int giaFood, byte[] hinhAnh, String moTa, int trangthai, int numberInCart) {
+    public Food(String maFood, String tenFood, int giaFood, byte[] hinhAnh) {
         this.maFood = maFood;
-        this.maLoai = maLoai;
         this.tenFood = tenFood;
         this.giaFood = giaFood;
         this.hinhAnh = hinhAnh;
-        this.moTa = moTa;
-        this.numberInCart = numberInCart;
     }
 
 
@@ -130,7 +125,6 @@ public class Food implements Serializable {
     }
     public static Bitmap convertByteArrayToBitmap(byte[] image){
         return BitmapFactory.decodeByteArray(image, 0, image.length);
-
     }
 
 

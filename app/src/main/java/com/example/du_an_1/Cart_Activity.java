@@ -1,9 +1,12 @@
 package com.example.du_an_1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,9 +25,11 @@ import com.example.du_an_1.Domain.CartCard;
 import com.example.du_an_1.Domain.OrderCard;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Cart_Activity extends AppCompatActivity {
+
     public static LinearLayout cartContainer;
     private static String status;
     private LinearLayout btnDangDen, btnLichSu, btnGioHang;
@@ -33,20 +38,39 @@ public class Cart_Activity extends AppCompatActivity {
     DAO_GioHang dao_gioHang;
     DAO_chitietDonHang dao_chitietDonHang;
     Food_DAO food_dao;
+    List<chitietDonHang> list = new ArrayList<>();
+    String mafoood, user_1;
+    int ma_ctd, mangdung;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String usernameLogged = sharedPreferences.getString("USERNAME", "");
 
         cartContainer = findViewById(R.id.cartContainer);
+        user_dao = new User_DAO(this);
+        dao_chitietDonHang = new DAO_chitietDonHang(this);
+        dao_gioHang = new DAO_GioHang(this);
+        food_dao = new Food_DAO(this);
+        list = new ArrayList<>();
+
+        Intent i = getIntent();
+        mangdung = Integer.valueOf(user_dao.getMaND(usernameLogged));
+        ma_ctd = i.getIntExtra("ma",0);
+        mafoood = dao_chitietDonHang.getIdmF(ma_ctd);
 
         referencesComponent();
         LoadOrder("craft");
         status = "craft";
+        Log.i("SQLite", mangdung+"");
     }
 
     private void referencesComponent(){
+        user_dao = new User_DAO(this);
+        dao_chitietDonHang = new DAO_chitietDonHang(this);
+
         btnGioHang = findViewById(R.id.btnGioHang);
         btnGioHang.setOnClickListener(view ->{
             resetAttribute();
@@ -80,46 +104,57 @@ public class Cart_Activity extends AppCompatActivity {
 
         Button btnThanhToan = findViewById(R.id.btnThanhToan);
         btnThanhToan.setOnClickListener(view ->{
+
             if(!status.equals("craft"))
                 return;
 
-            Cursor cursor = dao_gioHang.getCart(MainActivity.user.getMaUser());
+            dao_gioHang = new DAO_GioHang(this);
+            Cursor cursor = dao_gioHang.getCart(mangdung);
             if(!cursor.moveToFirst())
                 return;
 
-            PaymentActivity.user = MainActivity.user;
+//            PaymentActivity.user = mangdung;
             Intent intent = new Intent(this, PaymentActivity.class);
             intent.putExtra("orderId", cursor.getInt(0));
             startActivity(intent);
+        });
+        Button btnTroVe = findViewById(R.id.btnTrolai);
+        btnTroVe.setOnClickListener(view ->{
+            finish();
         });
     }
 
     private void LoadOrder(String type){
         user_dao = new User_DAO(this);
-        Intent i = getIntent();
-        String user_1 = i.getStringExtra("user");
-        int mangdung = Integer.valueOf(user_dao.getMaND(user_1));
+        food_dao = new Food_DAO(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String usernameLogged = sharedPreferences.getString("USERNAME", "");
+        mangdung = Integer.valueOf(user_dao.getMaND(usernameLogged));
+
+
         status = type;
         cartContainer.removeAllViews();
         switch (type) {
-            case "craft":
-                dao_gioHang = new DAO_GioHang(this);
+            case "craft":{
                 Cursor cursor = dao_gioHang.getCart(mangdung);
+                Log.i("SQLite", String.valueOf(cursor));
                 if (!cursor.moveToFirst())
                     return;
                 cursor.moveToFirst();
+                dao_chitietDonHang = new DAO_chitietDonHang(this);
                 ArrayList<chitietDonHang> orderDetailArrayList = dao_chitietDonHang.getCartDetailList(cursor.getInt(0));
+//                list = dao_chitietDonHang.getCartDetailList(cursor.getInt(0));
                 if (orderDetailArrayList.size() > 0) {
                     Food food;
                     for (chitietDonHang orderDetail : orderDetailArrayList) {
-                        food = food_dao.getFoodById(orderDetail.getFoodId());
+                        food = food_dao.getFoodById(mafoood);
                         CartCard card = new CartCard(this, food, orderDetail);
                         cartContainer.addView(card);
                     }
                 }
-                break;
+                break;}
             case "coming": {
-                ArrayList<GioHang> orderArrayList = dao_gioHang.getOrderOfUser(Integer.valueOf(user_dao.getMaND(user_1)), "Coming");
+                ArrayList<GioHang> orderArrayList = dao_gioHang.getOrderOfUser(Integer.valueOf(user_dao.getMaND(usernameLogged)), "Coming");
                 if (orderArrayList.size() > 0) {
                     for (GioHang order : orderArrayList) {
                         OrderCard card = new OrderCard(this, order);

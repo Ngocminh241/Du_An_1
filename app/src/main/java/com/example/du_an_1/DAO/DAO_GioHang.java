@@ -1,5 +1,6 @@
 package com.example.du_an_1.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,34 +20,40 @@ public class DAO_GioHang {
         db = dbHelper.getWritableDatabase();
     }
 
-
-//    int TT;
-//    public int getCart(int userId) {
+    public Cursor getCart(int userId){
+        return dbHelper.getDataRow("SELECT ID_DON_HANG FROM gioHang WHERE status='Craft' AND maUser=" + userId);
+    }
+//    int maDH;
+//    public String getCart(int userId) {
 //        try {
-//            Cursor cursor = db.rawQuery("SELECT ID_DON_HANG FROM DON_HANG WHERE maUser=" + userId, new String[] {String.valueOf(userId)});
+//            Cursor cursor = db.rawQuery("SELECT ID_DON_HANG FROM gioHang WHERE status='Craft' AND maUser="+userId, new String[] {String.valueOf(mafod)});
 //            if (cursor.getCount() > 0) {
 //                cursor.moveToFirst();
 //                while (!cursor.isAfterLast()) {
-//                    TT = Integer.parseInt(cursor.getString(0));
+//                    maDH = Integer.parseInt(cursor.getString(0));
 //                    cursor.moveToNext();
 //                }
 //            }
 //        } catch (Exception e) {
 //            Log.i(TAG, "Lỗi" + e);
 //        }
-//        return TT;
+//        return String.valueOf(maDH);
 //    }
-    public Cursor getCart(int userId){
-        return dbHelper.getDataRow("SELECT ID_DON_HANG FROM gioHang WHERE status='Craft' AND maUser=" + userId);
+    public Cursor getCart2(int giohangId){
+        return dbHelper.getDataRow("SELECT maUser FROM gioHang WHERE status='Craft' AND ID_DON_HANG=" + giohangId);
     }
-    public void addOrder(GioHang order) {
-        String query = "INSERT INTO gioHang VALUES(null," +
-                order.getUserId() + ",'" +
-                order.getAddress() + "','" +
-                order.getDateOfOrder() + "'," +
-                order.getTotalValue() + ",'" +
-                order.getStatus() + "')";
-        dbHelper.queryData(query);
+    public Cursor getCart3(int ctdonId){
+        return dbHelper.getDataRow("SELECT ID_DON_HANG FROM gioHang WHERE status='Craft' AND id_ctdh=" + ctdonId);
+    }
+    public long addOrder(GioHang order) {
+        ContentValues values = new ContentValues();
+        values.put("id_ctdh", order.getId_ct());
+        values.put("maUser", order.getUserId());
+        values.put("address", order.getAddress());
+        values.put("NGAY_DAT", order.getDateOfOrder());
+        values.put("TONG_GIA",order.getTotalValue());
+        values.put("status",order.getStatus());
+        return db.insert("gioHang", null, values);
     }
     public String getDate(){
         Calendar calendar = Calendar.getInstance();
@@ -74,10 +81,11 @@ public class DAO_GioHang {
         while (cursor.moveToNext()){
             orderList.add(new GioHang(cursor.getInt(0),
                     cursor.getInt(1),
-                    cursor.getString(2),
+                    cursor.getInt(2),
                     cursor.getString(3),
-                    cursor.getDouble(4),
-                    cursor.getString(5)));
+                    cursor.getString(4),
+                    cursor.getInt(5),
+                    cursor.getString(6)));
         }
         return orderList;
     }

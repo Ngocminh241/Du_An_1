@@ -2,7 +2,9 @@ package com.example.du_an_1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,22 +50,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String usernameLogged = sharedPreferences.getString("USERNAME", "");
         //hiện tên người dùng
         tv_name = findViewById(R.id.tv_title_food);
         user_dao = new User_DAO(this);
 //        User thuThu = user_dao.getMaDN(user);
-        Intent i = getIntent();
-        String user_1 = i.getStringExtra("user");
-        String username = user_dao.getTenTV(user_1);
+        String username = user_dao.getTenTV(usernameLogged);
 //        tv_name.setText("Hi " + username);
-
-        int userID = Integer.parseInt(user_dao.getMaND(user_1));
+        int userID = Integer.parseInt(user_dao.getMaND(usernameLogged));
         ShowDetailActivity_2.userID = userID;
         ViewOrderActivity.userID = userID;
         FoodAdapter_home2.userID = userID;
+        Log.i("SQLite", "Mã: "+userID);
 
-        if (user_1 == "Admin"){
+        if (usernameLogged == "Admin"){
             tv_name.setText("Hi Admin");
         } else {
             tv_name.setText("Hi " + username);
@@ -112,13 +113,11 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout profile = findViewById(R.id.profile_btn);
         LinearLayout support = findViewById(R.id.support_btn);
 
-        Intent i = getIntent();
-        String user_1 = i.getStringExtra("user");
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(MainActivity.this, Cart_Activity.class);
-                ic.putExtra("user", user_1);
                 startActivity(ic);
             }
         });
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     Intent ic = new Intent(MainActivity.this, Support.class);
-                    ic.putExtra("user", user_1);
+
                     startActivity(ic);
             }
         });
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(MainActivity.this, Profile.class);
-                ic.putExtra("user", user_1);
+
                 startActivity(ic);
 
 //                startActivity(new Intent(MainActivity.this, Profile.class));
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(MainActivity.this, MainActivity.class);
-                ic.putExtra("user", user_1);
+
                 startActivity(ic);
             }
         });
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(MainActivity.this, SettingActivity.class);
-                ic.putExtra("user", user_1);
+
                 startActivity(ic);
             }
         });
@@ -165,10 +164,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategoryList = findViewById(R.id.recycler_categories);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
 
-        Intent i = getIntent();
-        String user_1 = i.getStringExtra("user");
-        String username = user_dao.getTenTV(user_1);
-
         list = type_of_food_dao.getAllTY(0);
         adapter1 = new Type_Of_Food_Adapter(this,list);
 //        adapter_2 = new FoodAdapter(this, food);
@@ -176,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
         context = (MainActivity) this;
 //        adapter_2 = adapter_food;
         type_of_food_dao = new Type_Of_Food_DAO(this);
-
         adapter1.notifyDataSetChanged();
 
     }

@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.du_an_1.DAO.Type_Of_Food_DAO;
+import com.example.du_an_1.DAO.User_DAO;
 import com.example.du_an_1.DTO.Type_Of_Food;
 import com.example.du_an_1.List_Category.Pizza_List;
 import com.example.du_an_1.MainActivity;
@@ -30,6 +31,7 @@ public class Type_Of_Food_ListCategory_Adapter extends RecyclerView.Adapter<Type
     Type_Of_Food_DAO T_food_dao;
     ArrayList<Type_Of_Food> list2;
     String strLoai;
+    User_DAO user_dao;
     private Type_Of_Food_ListCategory_Adapter.ViewHolder currentViewHolder;
 
 
@@ -53,6 +55,7 @@ public class Type_Of_Food_ListCategory_Adapter extends RecyclerView.Adapter<Type
 
     @Override
     public void onBindViewHolder(@NonNull Type_Of_Food_ListCategory_Adapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        user_dao = new User_DAO(context);
 
         holder.tv_title.setText(list.get(position).getTenLoai());
         holder.img_pic.setImageURI(list.get(position).hienthi(context));
@@ -68,6 +71,7 @@ public class Type_Of_Food_ListCategory_Adapter extends RecyclerView.Adapter<Type
                 strLoai = list.get(position).getTenLoai();
                 Intent intent = new Intent(holder.itemView.getContext(), Pizza_List.class);
                 intent.putExtra("title", strLoai);
+                intent.putExtra("user", String.valueOf(MainActivity.user));
                 holder.itemView.getContext().startActivity(intent);
             }
         });

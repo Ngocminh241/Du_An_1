@@ -2,6 +2,7 @@ package com.example.du_an_1.DAO;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -98,8 +99,8 @@ public class Food_DAO {
         return list;
     }
 
-    public List<Food> getAllA() {
-        List<Food> list = new ArrayList<>();
+    public Food getAllA() {
+        Food list = new Food();
         Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai", null);
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
@@ -111,11 +112,29 @@ public class Food_DAO {
                 byte[] hinhAnh = c.getBlob(4);
                 String moTa = c.getString(5);
                 int trangthai = c.getInt(6);
-                list.add(new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa, trangthai));
+                new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa, trangthai);
             } while (c.moveToNext());
         }
         return list;
     }
+//    public Food getAllAA() {
+//        Food list = new Food();
+//        Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai", null);
+//        if (c != null && c.getCount() > 0) {
+//            c.moveToFirst();
+//            do {
+//                String maFood = c.getString(0);
+//                int maLoai = c.getInt(1);
+//                String tenFood = c.getString(2);
+//                int giaFood = c.getInt(3);
+//                byte[] hinhAnh = c.getBlob(4);
+//                String moTa = c.getString(5);
+//                int trangthai = c.getInt(6);
+//                new Food(maFood, maLoai, tenFood, giaFood, hinhAnh, moTa, trangthai);
+//            } while (c.moveToNext());
+//        }
+//        return list;
+//    }
     public List<Food> getAllB(int maLoai) {
         List<Food> list = new ArrayList<>();
         Cursor c = db.rawQuery("SELECT * FROM Food INNER JOIN loai_Food on Food.maLoai = loai_Food.maLoai where food.trangThai = 0 AND food.maLoai=" + maLoai, null);
@@ -173,9 +192,84 @@ public class Food_DAO {
         }
         return mT;
     }
+    String maloai;
+    public String getMaLoaibyTen(String MT) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT maLoai FROM FOOD WHERE tenFood=?", new String[] {String.valueOf(MT)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    maloai = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return maloai;
+    }
+    String ma;
+    public String getMAbyTen(String MT) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT maFood FROM FOOD WHERE tenFood=?", new String[] {String.valueOf(MT)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    ma = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return ma;
+    }
+    String ma2;
+    public Food getData(String MT) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT maFood AND tenFood AND giaFood AND hinhAnh FROM FOOD WHERE maFood=?", new String[] {String.valueOf(MT)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    ma2 = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return new Food();
+    }
+    @SuppressLint("Range")
+    public Food getFoodById(String id) {
+        String query = "SELECT * FROM FOOD WHERE maFood=" + id;
+        Cursor cursor = dbHelper.getDataRow(query);
+        Food food1 = null;
+        if (cursor != null && cursor.getCount() > 0) {
+            food1 = new Food(cursor.getString(0), cursor.getInt(1), cursor.getString(2), cursor.getInt(3), cursor.getBlob(4), cursor.getString(5), cursor.getInt(6));
+            cursor.close();
+        }
+        return food1;
+    }
+    int giaBYten;
+    public String getGIAbyTen(String gia) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT giaFood FROM FOOD WHERE tenFood=?", new String[] {String.valueOf(gia)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    giaBYten = Integer.parseInt(cursor.getString(0));
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return String.valueOf(giaBYten);
+    }
 
     int giaFOOD;
-    public String getGIA(String gia) {
+    public int getGIA(String gia) {
         try {
             Cursor cursor = db.rawQuery("SELECT giaFood FROM FOOD WHERE maFood=?", new String[] {String.valueOf(gia)});
             if (cursor.getCount() > 0) {
@@ -188,7 +282,7 @@ public class Food_DAO {
         } catch (Exception e) {
             Log.i(TAG, "Lỗi" + e);
         }
-        return String.valueOf(giaFOOD);
+        return giaFOOD;
     }
     int theLoai;
     public String getLoai(int loai) {
@@ -223,11 +317,7 @@ public class Food_DAO {
         return String.valueOf(TT);
     }
 
-    public Food getFoodById(String id){
-        String query = "SELECT * FROM FOOD WHERE maFood=" + id;
-        Cursor cursor = dbHelper.getDataRow(query);
-        return new Food(cursor.getString(0), cursor.getInt(1), cursor.getString(2), cursor.getInt(3), cursor.getBlob(4), cursor.getString(5), cursor.getInt(6));
-    }
+
     byte[] hinh;
     public byte[] getAnh(String HA) {
         try {

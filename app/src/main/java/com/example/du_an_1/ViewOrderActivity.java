@@ -20,6 +20,7 @@ import com.example.du_an_1.DTO.chitietDonHang;
 import com.example.du_an_1.Domain.CartCard;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViewOrderActivity extends AppCompatActivity {
     private LinearLayout layout_container;
@@ -29,6 +30,7 @@ public class ViewOrderActivity extends AppCompatActivity {
     private Food_DAO food_dao;
     private GioHang order;
     public static int userID;
+    List<chitietDonHang> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class ViewOrderActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         order = (GioHang) intent.getSerializableExtra("order");
+        Intent i = getIntent();
+        String fd = i.getStringExtra("object_2");
+        food_dao = new Food_DAO(this);
+        list = new ArrayList<>();
 
         referencesComponent();
         LoadData();
@@ -59,6 +65,7 @@ public class ViewOrderActivity extends AppCompatActivity {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setMessage("Bạn có muốn xóa món đơn hàng này không?");
             dialog.setPositiveButton("Có", (dialogInterface, i) -> {
+                dao_gioHang = new DAO_GioHang(this);
                 order.setStatus("Canceled");
                 dao_gioHang.updateOrder(order);
                 Toast.makeText(this, "Đơn hàng đã bị hủy!", Toast.LENGTH_SHORT).show();
@@ -73,15 +80,20 @@ public class ViewOrderActivity extends AppCompatActivity {
     }
 
     private void LoadData(){
+        Intent i = getIntent();
+        String fd = i.getStringExtra("object_2");
+        food_dao = new Food_DAO(this);
         tvDate.setText(String.format("Ngày đặt hàng: %s", order.getDateOfOrder()));
         tvAddress.setText(String.format("Địa chỉ: %s", order.getAddress()));
-        tvPrice.setText(String.format("Tổng giá trị: %s", getRoundPrice(order.getTotalValue())));
+        tvPrice.setText(String.format("Tổng giá trị: %s", order.getTotalValue()));
         tvStatus.setText(String.format("Trạng thái giao hàng: %s",order.getStatus()));
 
-        ArrayList<chitietDonHang> orderDetailArrayList = dao_chitietDonHang.getCartDetailList(order.getId());
-        if(orderDetailArrayList.size() > 0){;
-            for(chitietDonHang orderDetail : orderDetailArrayList){
-                Food food = food_dao.getFoodById(orderDetail.getFoodId());
+        dao_chitietDonHang = new DAO_chitietDonHang(this);
+        list = dao_chitietDonHang.getCartDetailList(order.getId());
+        if(list.size() > 0){;
+            for(chitietDonHang orderDetail : list){
+
+                Food food = food_dao.getFoodById(fd);
                 CartCard card = new CartCard(this, food, orderDetail, false);
                 card.setOnClickListener(view -> {
                     ShowDetailActivity_2.food = food;
@@ -100,7 +112,4 @@ public class ViewOrderActivity extends AppCompatActivity {
 
     }
 
-    private String getRoundPrice(Double price){
-        return Math.round(price) + " VNĐ";
-    }
 }

@@ -134,7 +134,7 @@ public class User_DAO {
     int madn;
     public String getMaND(String vt) {
         try {
-            Cursor cursor = db.rawQuery("SELECT maUser FROM User WHERE maDN="+vt, new String[] {String.valueOf(vt)});
+            Cursor cursor = db.rawQuery("SELECT maUser FROM User WHERE maDN=?", new String[] {String.valueOf(vt)});
             if (cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
@@ -198,6 +198,22 @@ public class User_DAO {
             Log.i(TAG, "Lỗi" + e);
         }
         return sdtTV;
+    }
+    String sdtTV2;
+    public String getsdtTV2(String maTV) {
+        try {
+            Cursor cursor = db.rawQuery("SELECT sDT FROM User WHERE maUser=?", new String[] {String.valueOf(maTV)});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    sdtTV2 = cursor.getString(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return sdtTV2;
     }
     String mkTV;
     public String getmkTV(String maTV) {

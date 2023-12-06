@@ -2,7 +2,9 @@ package com.example.du_an_1;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,12 +28,13 @@ public class UserInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_information);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String usernameLogged = sharedPreferences.getString("USERNAME", "");
         Intent i = getIntent();
         String user = i.getStringExtra("user");
         user_dao = new User_DAO(this);
         String username = user_dao.getTenTV(user);
-        int maND = Integer.parseInt(user_dao.getMaND(user));
+        int maND = Integer.parseInt(user_dao.getMaND(usernameLogged));
 
         EditText editText_user_name = findViewById(R.id.editText_user_name);
         EditText editText_user_phone = findViewById(R.id.editText_user_phone);

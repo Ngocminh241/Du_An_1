@@ -3,15 +3,25 @@ package com.example.du_an_1.DTO;
 import java.io.Serializable;
 
 public class GioHang implements Serializable {
-    private Integer id;
-    private Integer userId;
+    private int id;
+    private int id_ct;
+    private int userId;
     private String address;
     private String dateOfOrder;
-    private Double totalValue;
+    private int totalValue;
     private String status;
 
 
-    public GioHang(Integer id, Integer userId, String address, String dateOfOrder, Double totalValue, String status) {
+    public GioHang(int id,int id_ct, int userId, String address, String dateOfOrder, int totalValue, String status) {
+        this.id = id;
+        this.id_ct = id_ct;
+        this.userId = userId;
+        this.address = address;
+        this.dateOfOrder = dateOfOrder;
+        this.totalValue = totalValue;
+        this.status = status;
+    }
+    public GioHang(int id, int userId, String address, String dateOfOrder, int totalValue, String status) {
         this.id = id;
         this.userId = userId;
         this.address = address;
@@ -20,19 +30,27 @@ public class GioHang implements Serializable {
         this.status = status;
     }
 
-    public Integer getId() {
+    public int getId_ct() {
+        return id_ct;
+    }
+
+    public void setId_ct(int id_ct) {
+        this.id_ct = id_ct;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -52,11 +70,11 @@ public class GioHang implements Serializable {
         this.dateOfOrder = dateOfOrder;
     }
 
-    public Double getTotalValue() {
+    public int getTotalValue() {
         return totalValue;
     }
 
-    public void setTotalValue(Double totalValue) {
+    public void setTotalValue(int totalValue) {
         this.totalValue = totalValue;
     }
 

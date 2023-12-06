@@ -1,7 +1,9 @@
 package com.example.du_an_1;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -30,6 +32,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2);
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String usernameLogged = sharedPreferences.getString("USERNAME", "");
         layout_user_information = findViewById(R.id.layout_user_information);
         TextView tv_name = findViewById(R.id.account_user_name);
         account_btn_layout_policy = findViewById(R.id.account_btn_layout_policy);
@@ -37,7 +41,7 @@ public class Profile extends AppCompatActivity {
         Intent i = getIntent();
         String user = i.getStringExtra("user");
         user_dao = new User_DAO(this);
-        String username = user_dao.getTenTV(user);
+        String username = user_dao.getTenTV(usernameLogged);
         if (strUser != ""){
             tv_name.setText(username);
         }else if (strUser==""){

@@ -1,30 +1,25 @@
 package com.example.du_an_1.DTO;
 
 public class chitietDonHang {
-    private Integer orderId;
+    private int orderId;
     private String foodId;
     private int price;
-    private Integer quantity;
+    private int quantity;
 
-    public chitietDonHang(Integer orderId, String foodId, int price) {
-        this.orderId = orderId;
-        this.foodId = foodId;
-        this.price = price;
-        this.quantity = 1;
-    }
 
-    public chitietDonHang(Integer orderId, String foodId, int price, Integer quantity) {
+
+    public chitietDonHang(int orderId, String foodId, int price, int quantity) {
         this.orderId = orderId;
         this.foodId = foodId;
         this.price = price;
         this.quantity = quantity;
     }
 
-    public Integer getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
@@ -44,11 +39,11 @@ public class chitietDonHang {
         this.price = price;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }
