@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginTop="5dp"
-            android:text="SoDT"
+            android:text="SoDT:"
             android:textColor="#373b54"
             android:textSize="14sp"
             android:textStyle="bold"/>
