@@ -54,14 +54,12 @@ public class DAO_chitietDonHang {
         values.put("maFood",od.getFoodId());
         values.put("GIA",od.getPrice());
         values.put("SO_LUONG",od.getQuantity());
-        try {
+
             db.insert("CHI_TIET_DON_HANG", null, values);
             return true;
-        } catch (Exception err){
-            return false;
-        }
+
     }
-    public ArrayList<chitietDonHang> getCartDetailList(Integer orderId){
+    public ArrayList<chitietDonHang> getCartDetailList(int orderId){
         ArrayList<chitietDonHang> orderDetailArrayList = new ArrayList<>();
         String query = "SELECT * FROM CHI_TIET_DON_HANG WHERE id_ctdh=" + orderId;
         Cursor cursor = dbHelper.getData(query);

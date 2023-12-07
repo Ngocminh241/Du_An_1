@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void Imgslide(){
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.banner1, "", ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel(R.drawable.banner2, "",ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel(R.drawable.banner3, "",ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner1, null, ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner2, null,ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner3, null,ScaleTypes.CENTER_CROP));
         ImageSlider imageSlider = findViewById(R.id.image_slider);
         imageSlider.setImageList(imageList);
 
