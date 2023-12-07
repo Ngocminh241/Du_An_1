@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void Imgslide(){
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.banner1, "Cà phê – điểm tựa của những giấc mơ...", ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel(R.drawable.banner2, "Mỗi hạt cà phê là một câu chuyện về đam mê.",ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel(R.drawable.banner3, "Năng lượng của ngày mới nằm trong một ly cà phê.",ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner1, "", ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner2, "",ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner3, "",ScaleTypes.CENTER_CROP));
         ImageSlider imageSlider = findViewById(R.id.image_slider);
         imageSlider.setImageList(imageList);
 

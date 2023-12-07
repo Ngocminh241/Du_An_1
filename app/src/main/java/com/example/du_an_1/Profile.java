@@ -23,7 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Profile extends AppCompatActivity {
     User_DAO user_dao;
-    LinearLayout layout_user_information, account_btn_layout_policy;
+    LinearLayout layout_user_information, account_btn_layout_policy, account_btn_layout_check;
     String strUser, strPass;
 
 
@@ -35,6 +35,8 @@ public class Profile extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String usernameLogged = sharedPreferences.getString("USERNAME", "");
         layout_user_information = findViewById(R.id.layout_user_information);
+        account_btn_layout_check = findViewById(R.id.account_btn_layout_check);
+
         TextView tv_name = findViewById(R.id.account_user_name);
         account_btn_layout_policy = findViewById(R.id.account_btn_layout_policy);
 
@@ -48,6 +50,15 @@ public class Profile extends AppCompatActivity {
             tv_name.setText("Thông tin người dùng");
             dangNhap();
         }
+        account_btn_layout_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ic = new Intent(Profile.this, Cart_Activity.class);
+                ic.putExtra("user",user_dao.getMDNTV(username));
+                startActivity(ic);
+
+            }
+        });
 
 
         account_btn_layout_policy.setOnClickListener(new View.OnClickListener() {
