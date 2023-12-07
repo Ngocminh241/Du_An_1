@@ -14,6 +14,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.du_an_1.Adapter.FoodAdapter_Home;
 import com.example.du_an_1.Adapter.FoodAdapter_home2;
 import com.example.du_an_1.Adapter.Type_Of_Food_Adapter;
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewPopular();
         bottomNavigation();
         recyclerViewListFood();
+        Imgslide();
 
         android.widget.SearchView searchBar = findViewById(R.id.search_food);
         searchBar.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
@@ -94,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+    private void Imgslide(){
+        ArrayList<SlideModel> imageList = new ArrayList<>();
+        imageList.add(new SlideModel(R.drawable.banner1, "Cà phê – điểm tựa của những giấc mơ...", ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner2, "Mỗi hạt cà phê là một câu chuyện về đam mê.",ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.banner3, "Năng lượng của ngày mới nằm trong một ly cà phê.",ScaleTypes.CENTER_CROP));
+        ImageSlider imageSlider = findViewById(R.id.image_slider);
+        imageSlider.setImageList(imageList);
+
     }
     private void handleSearch(String query) {
         List<Food> listSearch = new ArrayList<>();

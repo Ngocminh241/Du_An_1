@@ -18,7 +18,8 @@
             android:layout_height="match_parent"
             android:text="@string/your_information"
             android:textColor="@color/white"
-            android:fontFamily="@font/notop_sans_regular"
+            android:textSize="30dp"
+            android:fontFamily="@font/ops"
             android:layout_gravity="center"
             android:gravity="center"/>
     </LinearLayout>

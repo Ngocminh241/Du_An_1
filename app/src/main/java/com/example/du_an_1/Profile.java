@@ -63,15 +63,7 @@ public class Profile extends AppCompatActivity {
         layout_user_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_name.getText()==""){
-                    dangNhap();
-                }
-                if (tv_name.getText()==username){
-                    Intent ic = new Intent(Profile.this, UserInformationActivity.class);
-                    ic.putExtra("user",user_dao.getMDNTV(username));
-                    startActivity(ic);
-                }
-
+                dangNhap();
             }
         });
 

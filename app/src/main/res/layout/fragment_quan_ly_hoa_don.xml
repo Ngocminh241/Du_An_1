@@ -1,36 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAF0E6"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.QuanLyHoaDonFragment">
+    tools:context=".Fragment.QuanLyHoaDonFragment"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
-        <TextView
+        android:elevation="10dp"
+        android:background="@drawable/bg_function">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Danh sách quản lý hóa đơn"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textColor="#FFA07A"
-            >
+            android:layout_height="50sp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        </TextView>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvHoaDon"
-            android:layout_marginTop="10dp"
-            android:background="#FAF0E6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <LinearLayout
+                android:id="@+id/btnDangDen"
+                android:layout_width="206sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/menuDriver"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvDangDen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/check_coming"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/ops"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btnLichSu"
+                android:layout_width="206sp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvLichSu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/history"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/ops"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="360sp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:elevation="7sp">
 
+        <LinearLayout
+            android:id="@+id/cartContainer"
+            android:layout_width="360sp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

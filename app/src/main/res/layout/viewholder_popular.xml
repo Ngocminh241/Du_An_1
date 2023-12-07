@@ -38,12 +38,12 @@
         android:id="@+id/tv_fee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="0.0"
         android:textColor="#373b54"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/img_pic"
-        app:layout_constraintHorizontal_bias="0.324"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/img_pic"
         app:layout_constraintTop_toBottomOf="@+id/img_pic" />
 

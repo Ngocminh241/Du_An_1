@@ -1,5 +1,6 @@
 package com.example.du_an_1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,7 +42,7 @@ public class Cart_Activity extends AppCompatActivity {
     DAO_chitietDonHang dao_chitietDonHang;
     Food_DAO food_dao;
     List<chitietDonHang> list = new ArrayList<>();
-    String mafoood, user_1;
+    String mafoood;
     int ma_ctd, mangdung;
 
     @Override
@@ -74,7 +77,7 @@ public class Cart_Activity extends AppCompatActivity {
         btnGioHang = findViewById(R.id.btnGioHang);
         btnGioHang.setOnClickListener(view ->{
             resetAttribute();
-            btnGioHang.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.main_color));
+            btnGioHang.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.menuDriver));
             tvGioHang.setTextColor(Color.WHITE);
 
             LoadOrder("craft");
@@ -83,7 +86,7 @@ public class Cart_Activity extends AppCompatActivity {
         btnDangDen = findViewById(R.id.btnDangDen);
         btnDangDen.setOnClickListener(view->{
             resetAttribute();
-            btnDangDen.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.main_color));
+            btnDangDen.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.menuDriver));
             tvDangDen.setTextColor(Color.WHITE);
 
             LoadOrder("coming");
@@ -92,7 +95,7 @@ public class Cart_Activity extends AppCompatActivity {
         btnLichSu = findViewById(R.id.btnLichSu);
         btnLichSu.setOnClickListener(view -> {
             resetAttribute();
-            btnLichSu.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.main_color));
+            btnLichSu.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(this),R.color.menuDriver));
             tvLichSu.setTextColor(Color.WHITE);
 
             LoadOrder("history");
@@ -102,14 +105,28 @@ public class Cart_Activity extends AppCompatActivity {
         tvDangDen = findViewById(R.id.tvDangDen);
         tvLichSu = findViewById(R.id.tvLichSu);
 
-        Button btnThanhToan = findViewById(R.id.btnThanhToan);
-        btnThanhToan.setOnClickListener(view ->{
 
+        Button btnThanhToan = findViewById(R.id.btnThanhToan);
+        btnThanhToan.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction()== MotionEvent.ACTION_DOWN){
+                    btnThanhToan.setTextColor(Color.RED);
+                }
+                if (motionEvent.getAction()== MotionEvent.ACTION_UP){
+                    btnThanhToan.setTextColor(Color.WHITE);
+                }
+                return false;
+            }
+        });
+        btnThanhToan.setOnClickListener(view ->{
             if(!status.equals("craft"))
                 return;
 
             dao_gioHang = new DAO_GioHang(this);
             Cursor cursor = dao_gioHang.getCart(mangdung);
+            rememberIDUser(mangdung);
             if(!cursor.moveToFirst())
                 return;
 
@@ -122,6 +139,13 @@ public class Cart_Activity extends AppCompatActivity {
         btnTroVe.setOnClickListener(view ->{
             finish();
         });
+    }
+    public void rememberIDUser(int u) {
+        SharedPreferences pref = getSharedPreferences("ID_USER_FILE", MODE_PRIVATE);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putInt("USER_ID", u);
+        // luu lai toan bo du lieu
+        edit.commit();
     }
 
     private void LoadOrder(String type){
@@ -169,7 +193,7 @@ public class Cart_Activity extends AppCompatActivity {
                 break;
             }
             case "history": {
-                ArrayList<GioHang> orderArrayList = dao_gioHang.getOrderOfUser(Integer.valueOf(user_dao.getMaND(user_1)), "Delivered");
+                ArrayList<GioHang> orderArrayList = dao_gioHang.getOrderOfUser(Integer.valueOf(user_dao.getMaND(usernameLogged)), "Delivered");
                 if (orderArrayList.size() > 0) {
                     for (GioHang order : orderArrayList) {
                         OrderCard card = new OrderCard(this, order);

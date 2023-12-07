@@ -39,6 +39,7 @@
             android:layout_marginVertical="5dp"
             android:background="@drawable/search_background"
             android:hint="Mật khẩu"
+            android:inputType="textPassword"
             android:paddingHorizontal="15dp" />
         <!--        <EditText-->
         <!--            android:id="@+id/txtGiaSp"-->
