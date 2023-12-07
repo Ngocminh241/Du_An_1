@@ -1,6 +1,8 @@
 package com.example.du_an_1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,16 +14,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ChinhSachBaoMat extends AppCompatActivity {
     User_DAO user_dao;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinh_sach_bao_mat);
 
-
-        Intent i = getIntent();
-        String user = i.getStringExtra("user");
+        SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String usernameLogged = sharedPreferences.getString("USERNAME", "");
         user_dao = new User_DAO(this);
-        String username = user_dao.getTenTV(user);
+        username = user_dao.getTenTV(usernameLogged);
+
+
 
         bottomNavigation();
     }
@@ -32,25 +36,17 @@ public class ChinhSachBaoMat extends AppCompatActivity {
         LinearLayout profile = findViewById(R.id.profile_btn);
         LinearLayout support = findViewById(R.id.support_btn);
 
-        Intent i = getIntent();
-        String user = i.getStringExtra("user");
-        user_dao = new User_DAO(this);
-        String username = user_dao.getTenTV(user);
+//        Intent i = getIntent();
+//        String user = i.getStringExtra("user");
+//        user_dao = new User_DAO(this);
+//        String username = user_dao.getTenTV(user);
 
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ic = new Intent(ChinhSachBaoMat.this, Cart_Activity.class);
-                ic.putExtra("user", user);
-                startActivity(ic);
-            }
-        });
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(ChinhSachBaoMat.this, Support.class);
-                ic.putExtra("user", user);
+                ic.putExtra("user", username);
                 startActivity(ic);
             }
         });
@@ -58,7 +54,7 @@ public class ChinhSachBaoMat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(ChinhSachBaoMat.this, Profile.class);
-                ic.putExtra("user", user);
+                ic.putExtra("user", username);
                 startActivity(ic);
             }
         });
@@ -67,7 +63,7 @@ public class ChinhSachBaoMat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(ChinhSachBaoMat.this, MainActivity.class);
-                ic.putExtra("user", user);
+                ic.putExtra("user", username);
                 startActivity(ic);
             }
         });
@@ -75,7 +71,7 @@ public class ChinhSachBaoMat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ic = new Intent(ChinhSachBaoMat.this, SettingActivity.class);
-                ic.putExtra("user", user);
+                ic.putExtra("user", username);
                 startActivity(ic);
             }
         });

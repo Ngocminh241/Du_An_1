@@ -253,31 +253,6 @@ Bên cạnh phương thức bán hàng theo combo, chủ doanh nghiệp có th�
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/trong"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:visibility="invisible">
-
-                    <ImageView
-                        android:id="@+id/img_trong"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/user1" />
-
-                    <TextView
-                        android:id="@+id/tv_trong"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Profile"
-                        android:textAlignment="center"
-                        android:textColor="#676767"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/support_btn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -328,19 +303,7 @@ Bên cạnh phương thức bán hàng theo combo, chủ doanh nghiệp có th�
 
         </com.google.android.material.bottomappbar.BottomAppBar>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/float_cart_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ff5e00"
-            android:elevation="3dp"
-            android:src="@drawable/icon_shopping_cart"
-            android:tint="#ffffff"
-            app:backgroundTint="#ff5e00"
-            app:layout_anchor="@id/app_bar"
-            app:maxImageSize="30dp">
 
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
