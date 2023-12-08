@@ -14,7 +14,7 @@
         <item
             android:title="Quản Lý Sản Phẩm"
             android:id="@+id/QLSP"
-            android:icon="@drawable/add_food"
+            android:icon="@drawable/logo_11"
             />
         <item
             android:title="Quản Lý Người Dùng"

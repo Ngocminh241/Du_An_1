@@ -70,6 +70,7 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
     Food_DAO dao_food;
     Dialog dialog;
 
+
     Food food;
     RecyclerView recyclerView;
     FoodAdapter_ql adapter_food;
@@ -124,6 +125,20 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter_food);
         adapter_food.notifyDataSetChanged();
+        android.widget.SearchView searchBar = view.findViewById(R.id.search_food);
+        searchBar.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                handleSearch(newText);
+                return true;
+            }
+        });
         floatThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +155,17 @@ public class QuanLySanPham_KD_Fragment extends Fragment {
             }
         });
         super.onViewCreated(view, savedInstanceState);
+    }
+    private void handleSearch(String query) {
+        List<Food> listSearch = new ArrayList<>();
+        for (Food food : list) {
+            if (food.getTenFood().toLowerCase().contains(query.toLowerCase())) {
+                listSearch.add(food);
+            }
+        }
+        adapter_food = new FoodAdapter_ql(getContext(), listSearch,0);
+        recyclerView.setAdapter(adapter_food);
+
     }
 
     String id_sp;

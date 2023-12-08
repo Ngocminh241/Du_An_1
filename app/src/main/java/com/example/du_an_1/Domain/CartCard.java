@@ -19,16 +19,20 @@ import com.example.du_an_1.DTO.Food;
 import com.example.du_an_1.DTO.chitietDonHang;
 import com.example.du_an_1.R;
 
+import java.util.List;
+
 public class CartCard extends LinearLayout{
     private Food food;
     private String restaurantName;
     private chitietDonHang card;
     private boolean activateControl;
     private int quantity;
-    private ImageView img_picFood;
+    List<Food> list;
+
     String tenfood;
     Food_DAO food_dao ;
     DAO_chitietDonHang dao_chitietDonHang;
+    private byte[] currentImage;
     public CartCard(Context context) {
         super(context);
         initControl(context);
@@ -116,13 +120,13 @@ public class CartCard extends LinearLayout{
         }
 
         // Set information for cart card
+        food_dao = new Food_DAO(context);
+        image.setImageBitmap(food.convertByteArrayToBitmap(food_dao.getAnh2(card.getFoodId())));
 
 
-
-//        byte[] imgdata = food.convertByteArrayToBitmap(food.getHinhAnh());
+//        byte [] imgdata = food.convertByteArrayToBitmap(food_dao.getAnh2(card.getFoodId())).getNinePatchChunk();
 //        Bitmap bitmap = BitmapFactory.decodeByteArray(imgdata, 0, imgdata.length);
 //        image.setImageBitmap(bitmap);
-//        image.setImageBitmap(food.convertByteArrayToBitmap());
         tvName.setText(food_dao.getTenFood(card.getFoodId()));
         tvPrice.setText(getRoundPrice(card.getPrice()));
         tvQuantity.setText("" + quantity);
