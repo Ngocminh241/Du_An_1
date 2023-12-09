@@ -40,6 +40,7 @@
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:textSize="18dp"
                     android:text="HỖ TRỢ"
                     android:textColor="@color/white" />
             </LinearLayout>

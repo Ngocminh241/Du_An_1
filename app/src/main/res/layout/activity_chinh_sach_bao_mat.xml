@@ -40,6 +40,8 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
                     android:text="@string/chinhsach"
                     android:textColor="@color/white" />
             </LinearLayout>

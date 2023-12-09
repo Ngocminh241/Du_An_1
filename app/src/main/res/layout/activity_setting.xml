@@ -40,6 +40,8 @@
                     android:fontFamily="@font/notop_sans_regular"
                     android:gravity="center"
                     android:text="@string/caidat"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
                     android:textColor="@color/white" />
             </LinearLayout>
 

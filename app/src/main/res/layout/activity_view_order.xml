@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".ViewOrderActivity">
@@ -12,29 +13,44 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/sub_color"
+        android:background="#FFAE36"
         android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/ops"
+            android:text="Thông tin đơn hàng" />
+
         <TextView
             android:id="@+id/tvDateMakeOrderView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/example_date"
+            android:textSize="20sp"
             android:layout_gravity="center_vertical"/>
         <TextView
             android:id="@+id/tvOrderPriceView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:text="@string/money_text" />
         <TextView
             android:id="@+id/tvOrderAddressView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/address" />
         <TextView
             android:id="@+id/tvOrderStatusView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/status" />
     </LinearLayout>
     <ScrollView
@@ -59,6 +75,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_box_rounded_red"
             android:layout_marginTop="10dp"
+            app:backgroundTint="@null"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
@@ -70,6 +89,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_box_rounded_red"
             android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
             android:textColor="@color/white"
             android:text="@string/exit"/>
     </LinearLayout>
